@@ -1,0 +1,322 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/22
+ * Time: 下午3:26
+ */
+
+require_once __DIR__ . '/libs/KdtApiClient.php';
+require_once('saeDao.php');
+require_once('mail.php');
+date_default_timezone_set('PRC');
+$appId = '15db6704596966a91b';
+$appSecret = '7e6254589d51c55c4b52f7578806e82c';
+// 获得调用有赞的处理对象
+$client = new KdtApiClient($appId, $appSecret);
+
+// 定时任务获取2小时内的交易
+$method = 'kdt.trades.sold.get';
+$params = array(
+    "start_created" => date('Y-m-d H:i:s', time() - 3600*24*60),
+);
+// 获得所有的当前时间段内的有赞订单
+$out = $client->post($method, $params);
+$trades = $out['response']['trades']; // 交易数组
+for ($i = 0; $i < count($trades); $i++) {
+    $where = array("num_iid" => $trades[$i]["num_iid"]);
+    $a = get($where,"pub");
+    // 买手发布的商品
+    if($a) {
+        if($trades[$i]['status']=='WAIT_SELLER_SEND_GOODS') {
+            $hook = $a[0]['uwid'];
+            $where = array("wechat_id"=>$hook);
+            $temp = get($where,"seller");
+            // 增加提醒次数的限制
+            $mmc = memcache_init();
+            if ($mmc == false) {
+                echo "mc init failed\n";
+            }
+            $tidRecord = memcache_get($mmc, $trades[$i]['tid']."_deliverTimes");
+            if($tidRecord) {
+                // 已经提醒过
+                $timeCount = $tidRecord['times'];
+                $dateDiff = time() - $tidRecord['date'];
+                if($timeCount < 3 && $dateDiff > 3600 * 12) {
+                    // 这里重新设置，12小时提醒一次，一共提醒3次
+                    if($temp[0]['mobile']) {
+                        $message = memcache_get($mmc,$temp[0]['mobile']);
+                        if($message) {
+                            // 已经发送过短信
+                            $messageDiff = time() - $message;
+                            if($messageDiff > 360) {
+                                // 同一个手机6min发送一次
+                                $url = "http://v.juhe.cn/sms/send?";
+                                $tpl_value=urlencode("#seller#=".$temp[0]['realName']."&#title#=".utf_substr($a[0]['title'],16)."&#keyword#=“我的发布”");
+                                $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$temp[0]['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+                                file_get_contents ( $url."".$para);
+                                memcache_set($mmc,$temp[0]['mobile'],time());
+                            }
+                        }
+                    }
+
+                    $addressString = $trades[$i]['receiver_state'].' '.
+                            $trades[$i]['receiver_address'].' 邮编：'. $trades[$i]['receiver_zip'];
+                    $mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+<p>亲爱的{$temp[0]['realName']}：</p>
+<p>你发布的商品已被购买，请尽快通过【红领巾】微信订阅号发货。</p>
+<br />
+<pre>订单信息
+商品信息：{$trades[$i]['title']}，{$trades[$i]['num']}件
+收货信息：{$trades[$i]['receiver_name']}，{$trades[$i]['receiver_mobile']}，{$addressString}</pre>
+<br />
+<pre>如何发货？
+STEP1：进入【红领巾】微信订阅号
+STEP2：输入“我的发布”
+STEP3：进入“我的发布”，在“待发货”一栏，选择物流公司、输入物流单号，确认完成</pre>
+
+<img src='http://testhlj.qiniudn.com/hlj_weixin_logo.jpg' alt='logo'/>
+</body>
+</html>";
+
+                    send_mail_lazypeople($temp[0]['email'],
+                        "红领巾通知",
+                        $mailcontent);
+
+                    $timeCount += 1;
+                    $newRe = array("times"=>$timeCount,"date"=>time());
+                    // 更新缓存
+                    memcache_set($mmc,$trades[$i]['tid']."_deliverTimes",$newRe);
+                }
+            }else {
+                // 提醒
+                if($temp[0]['mobile']) {
+                    // 判断防止单个号码重复发送多次，五分钟单个号码发送一次
+                    $message = memcache_get($mmc,$temp[0]['mobile']);
+                    if($message) {
+                        // 已经发送过短信
+                        $messageDiff = time() - $message;
+                        if($messageDiff > 360) {
+                            // 同一个手机6min发送一次
+                            $url = "http://v.juhe.cn/sms/send?";
+                            $tpl_value=urlencode("#seller#=".$temp[0]['realName']."&#title#=".utf_substr($a[0]['title'],16)."&#keyword#=“我的发布”");
+                            $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$temp[0]['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+                            file_get_contents ( $url."".$para);
+                            memcache_set($mmc,$temp[0]['mobile'],time());
+                        }
+                    }else {
+                        $url = "http://v.juhe.cn/sms/send?";
+                        $tpl_value=urlencode("#seller#=".$temp[0]['realName']."&#title#=".utf_substr($a[0]['title'],16)."&#keyword#=“我的发布”");
+                        $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$temp[0]['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+                        file_get_contents ( $url."".$para);
+                        memcache_set($mmc,$temp[0]['mobile'],time());
+
+                    }
+                }
+
+                $addressString = $trades[$i]['receiver_state'].' '.
+                    $trades[$i]['receiver_address'].' 邮编：'. $trades[$i]['receiver_zip'];
+                $mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+<p>亲爱的{$temp[0]['realName']}：</p>
+<p>你发布的商品已被购买，请尽快通过【红领巾】微信订阅号发货。</p>
+<br />
+<pre>订单信息
+商品信息：{$trades[$i]['title']}，{$trades[$i]['num']}件
+收货信息：{$trades[$i]['receiver_name']}，{$trades[$i]['receiver_mobile']}，{$addressString}</pre>
+<br />
+<pre>如何发货？
+STEP1：进入【红领巾】微信订阅号
+STEP2：输入“我的发布”
+STEP3：进入“我的发布”，在“待发货”一栏，选择物流公司、输入物流单号，确认完成</pre>
+
+<img src='http://testhlj.qiniudn.com/hlj_weixin_logo.jpg' alt='logo'/>
+</body>
+</html>";
+
+                send_mail_lazypeople($temp[0]['email'],
+                    "红领巾通知",
+                    $mailcontent);
+
+
+                // 建立提醒记录缓存
+                $times = array("times" => 1, "date"=>time());
+                memcache_set($mmc,$trades[$i]['tid']."_deliverTimes",$times);
+            }
+
+        }
+    }else {
+        if ($trades[$i]['status'] == 'WAIT_SELLER_SEND_GOODS') {
+            // 查找卖家微信号
+            $whereBuyOwn = array("tid" => $trades[$i]["tid"]);
+            $beta = get($whereBuyOwn, "auction");
+            $hook = $beta[0]['seller_wechat_id'];
+            $where = array("wechat_id" => $hook);
+            $temp = get($where, "seller");
+            // 增加提醒次数的限制
+            $mmc = memcache_init();
+            if ($mmc == false) {
+                echo "mc init failed\n";
+            }
+            $tidRecord = memcache_get($mmc, $trades[$i]['tid'] . "_deliverTimes");
+            if ($tidRecord) {
+                // 已经提醒过
+                $timeCount = $tidRecord['times'];
+                $dateDiff = time() - $tidRecord['date'];
+                if ($timeCount < 3 && $dateDiff > 3600 * 12) {
+                    // 这里重新设置，多长时间提醒，提醒多少次
+                    if ($temp[0]['mobile']) {
+                        $message = memcache_get($mmc, $temp[0]['mobile']);
+                        if ($message) {
+                            // 已经发送过短信
+                            $messageDiff = time() - $message;
+                            if ($messageDiff > 360) {
+                                // 同一个手机6min发送一次
+                                $url = "http://v.juhe.cn/sms/send?";
+                                $tpl_value = urlencode("#seller#=" . $temp[0]['realName'] . "&#title#=" . utf_substr($trades[$i]['title'],16) . "&#keyword#=“我的发布”");
+                                $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=" . $temp[0]['mobile'] . "&tpl_id=1100&tpl_value=" . $tpl_value;
+                                file_get_contents($url . "" . $para);
+                                memcache_set($mmc, $temp[0]['mobile'], time());
+                            }
+                        }
+                    }
+                    $addressString = $trades[$i]['receiver_state'].' '.
+                        $trades[$i]['receiver_address'].' 邮编：'. $trades[$i]['receiver_zip'];
+                    $mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+<p>亲爱的{$temp[0]['realName']}：</p>
+<p>你承接的买家需求，买家已完成付款。请尽快通过【红领巾】微信订阅号发货。</p>
+<br />
+<pre>订单信息
+商品信息：{$trades[$i]['title']}，{$trades[$i]['num']}件
+收货信息：{$trades[$i]['receiver_name']}，{$trades[$i]['receiver_mobile']}，{$addressString}</pre>
+<br />
+<pre>如何发货？
+STEP1：进入【红领巾】微信订阅号
+STEP2：输入“我的发布”
+STEP3：进入“我的发布”，在“待发货”一栏，选择物流公司、输入物流单号，确认完成</pre>
+
+<img src='http://testhlj.qiniudn.com/hlj_weixin_logo.jpg' alt='logo'/>
+</body>
+</html>";
+
+                    send_mail_lazypeople($temp[0]['email'],
+                        "红领巾通知",
+                        $mailcontent);
+                    $timeCount += 1;
+                    $newRe = array("times" => $timeCount, "date" => time());
+                    // 更新缓存
+                    memcache_set($mmc, $trades[$i]['tid'] . "_deliverTimes", $newRe);
+                }
+            } else {
+                // 提醒
+                if ($temp[0]['mobile']) {
+                    // 判断防止单个号码重复发送多次，五分钟单个号码发送一次
+                    $message = memcache_get($mmc, $temp[0]['mobile']);
+                    if ($message) {
+                        // 已经发送过短信
+                        $messageDiff = time() - $message;
+                        if ($messageDiff > 360) {
+                            // 同一个手机6min发送一次
+                            $url = "http://v.juhe.cn/sms/send?";
+                            $tpl_value = urlencode("#seller#=" . $temp[0]['realName'] . "&#title#=" . utf_substr($trades[$i]['title'],16) . "&#keyword#=“我的发布”");
+                            $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=" . $temp[0]['mobile'] . "&tpl_id=1100&tpl_value=" . $tpl_value;
+                            file_get_contents($url . "" . $para);
+                            memcache_set($mmc, $temp[0]['mobile'], time());
+                        }
+                    } else {
+                        $url = "http://v.juhe.cn/sms/send?";
+                        $tpl_value = urlencode("#seller#=" . $temp[0]['realName'] . "&#title#=" . utf_substr($trades[$i]['title'],16) . "&#keyword#=“我的发布”");
+                        $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=" . $temp[0]['mobile'] . "&tpl_id=1100&tpl_value=" . $tpl_value;
+                        file_get_contents($url . "" . $para);
+                        memcache_set($mmc, $temp[0]['mobile'], time());
+
+                    }
+                }
+
+                $addressString = $trades[$i]['receiver_state'].' '.
+                    $trades[$i]['receiver_address'].' 邮编：'. $trades[$i]['receiver_zip'];
+                $mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+<p>亲爱的{$temp[0]['realName']}：</p>
+<p>你承接的买家需求，买家已完成付款。请尽快通过【红领巾】微信订阅号发货。</p>
+<br />
+<pre>订单信息
+商品信息：{$trades[$i]['title']}，{$trades[$i]['num']}件
+收货信息：{$trades[$i]['receiver_name']}，{$trades[$i]['receiver_mobile']}，{$addressString}</pre>
+<br />
+<pre>如何发货？
+STEP1：进入【红领巾】微信订阅号
+STEP2：输入“我的发布”
+STEP3：进入“我的发布”，在“待发货”一栏，选择物流公司、输入物流单号，确认完成</pre>
+
+<img src='http://testhlj.qiniudn.com/hlj_weixin_logo.jpg' alt='logo'/>
+</body>
+</html>";
+
+                send_mail_lazypeople($temp[0]['email'],
+                    "红领巾通知",
+                    $mailcontent);
+
+
+                // 建立提醒记录缓存
+                $times = array("times" => 1, "date" => time());
+                memcache_set($mmc, $trades[$i]['tid'] . "_deliverTimes", $times);
+            }
+
+        }
+
+    }
+
+}
+
+function utf_substr($str,$len)
+{
+    for($i=0;$i<$len;$i++)
+    {
+        $temp_str=substr($str,0,1);
+        if(ord($temp_str) > 127)
+        {
+            $i++;
+            if($i<$len)
+            {
+                $new_str[]=substr($str,0,3);
+                $str=substr($str,3);
+            }
+        }
+        else
+        {
+            $new_str[]=substr($str,0,1);
+            $str=substr($str,1);
+        }
+    }
+    return join($new_str,'');
+}
+
+
+?>

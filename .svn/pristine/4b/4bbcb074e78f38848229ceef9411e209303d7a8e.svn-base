@@ -1,0 +1,56 @@
+<?php
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <title></title>
+</head>
+<style>
+    #fuck {
+        width: 100%;
+        position: absolute;
+        top: 46px;
+        left: 0;
+        z-index: 3;
+        height: 520px;
+    }
+    #hello {
+        background: #c60a1e;
+        color: white;
+        padding: 5px 5px 0 10px;
+        position: fixed;
+        top: -10px;
+        left: 0;
+        z-index: 100;
+        max-height: 1000px;
+        font: normal 14px/22px Arial,"Microsoft YaHei";
+    }
+    #outer {
+        position: relative;
+
+    }
+</style>
+<body>
+<div id="outer">
+    <p id="hello">订单金额合计<?php echo $_POST['totalHidden'] ?>元，购买<?php echo (int)$_POST['totalHidden'] ?>朵小红花，才能完成交易哦！╭(￣▽￣)╯</p>
+    <iframe src="http://wd.koudai.com/item.html?itemID=664015408&wfr=wx" frameborder="0" name="fuck" id="fuck"></iframe>
+</div>
+<script>
+    function jumpurl(){
+        location='http://wd.koudai.com/item.html?itemID=664015408&wfr=wx';
+    }
+    setTimeout('jumpurl()',3000);
+</script>
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>

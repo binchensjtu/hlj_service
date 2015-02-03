@@ -1,0 +1,12 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/9
+ * Time: 下午7:25
+ */
+
+$tid = $_REQUEST['tid'];
+$result = json_encode(array("hello"=>"sha"));
+$callback=$_GET['callback'];
+echo $callback."($result)";

@@ -1,0 +1,28 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/3
+ * Time: 下午5:16
+ */
+$mmc=memcache_init();
+if($mmc==false)
+    echo "mc init failed\n";
+else
+{
+    $trace = memcache_get("clx","what");
+    if(!trace) {
+        $talkArray = unserialize($trace);
+        if(count($talkArray)== 10) {
+            array_shift($talkArray);
+        }
+        array_push($talkArray,$this->getRequest('content'));
+        $afterSerial = serialize($talkArray);
+
+    } else {
+        $talkArray = array($this->getRequest('content'));
+        $afterSerial = serialize($talkArray);
+    }
+    memcache_set($mmc,getRequest('FromUserName'),$afterSerial);
+}
+?>

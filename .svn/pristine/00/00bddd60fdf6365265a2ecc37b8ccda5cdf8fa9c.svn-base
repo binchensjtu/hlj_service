@@ -1,0 +1,6 @@
+.us {background: url(../img/country/us.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.jp {background: url(../img/country/jp.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.hk {background: url(../img/country/hk.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.fr {background: url(../img/country/fr.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.de {background: url(../img/country/de.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.cn {background: url(../img/country/cn.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}

@@ -1,0 +1,7 @@
+$("#closeit").onclick(function(){
+    document.write("ok");
+    this.preventDefault();
+    alert("hello");
+    window.close();
+
+});

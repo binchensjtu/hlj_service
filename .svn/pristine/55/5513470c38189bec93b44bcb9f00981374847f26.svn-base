@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <a href="#"  onclick="window.close();" data-icon="home" data-role="button" id="closeit">首页</a>
+        <h1>收到了，敬礼！</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="./img/red.jpg" alt=""/><br>
+        <p>请求已经收到，纽约的红领巾们正在赶往第五大道进行采购！</p>
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<?php
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <title></title>
+</head>
+<style>
+    #fuck {
+        width: 100%;
+        height: 1000px;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        z-index: 3;
+    }
+    #hello {
+        background: red;
+        color: white;
+        padding: 5px 5px 5px 10px;
+        position: fixed;
+        top: -10px;
+        left: 0;
+        z-index: 100;
+    }
+    #outer {
+        position: relative;
+
+    }
+</style>
+<body>
+<div id="outer">
+    <p id="hello">订单金额合计23.00元，购买23朵小红花，才能完（成）成（功）交（剁）易（手）哦！╭(￣▽￣)╯</p>
+    <iframe src="http://wd.koudai.com/item.html?itemID=664015408&wfr=wx" frameborder="0" id="fuck"></iframe>
+</div>
+</body>
+</html>
+
+
+</body>
+</html>

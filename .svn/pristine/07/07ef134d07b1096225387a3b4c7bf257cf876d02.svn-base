@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+
+$country = "美国";
+$content['categories'] = array("其他国家","法国","日本","澳大利亚","美国","英国","香港");
+for($i=0; $i<count($content['categories']); $i++) {
+    if($country != $content['categories'][$i]) {
+        $content['categories'][$i] = 0;
+    }
+}
+$content['description'] = "fuck";
+echo $content['categories'];
+//  $content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
+$content['mt_keywords'] = "you";
+
+var_dump($content['categories']) ;
+
+
+?>

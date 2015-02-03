@@ -1,0 +1,10 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/9
+ * Time: 下午7:25
+ */
+$result = json_encode(array("hello"=>"sha"));
+$callback=$_GET['callback'];
+echo $callback."($result)";

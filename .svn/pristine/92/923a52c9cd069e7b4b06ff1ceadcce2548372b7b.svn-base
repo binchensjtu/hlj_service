@@ -1,0 +1,21 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+require('./weixin.php');
+function getMemControl($fromUsername) {
+    $mmc = memcache_init();
+    $outcome = memcache_get($mmc, $fromUsername."_control");
+    return $outcome;
+
+}
+
+$out = getMemControl("wonima");
+var_dump($out);
+
+
+
+?>

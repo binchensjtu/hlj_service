@@ -1,0 +1,131 @@
+<?php
+$mysql = new SaeMysql();
+// 插入代购国家、品牌、商品、备注
+$sql = "INSERT  INTO `auction` (`country`, `brand`, `item`, `information`, `auc_time`) VALUES ('".$_POST['country']."','".$_POST['brand']."','". $_POST['item']."','".$_POST['information']."',NOW() )";
+$mysql->runSql($sql);
+if ($mysql->errno() != 0) {
+    die("Error:" . $mysql->errmsg());
+}
+$mysql->closeDb();
+$mail = new SaeMail();
+$mail->quickSend(
+    "xhclybm@163.com" ,
+    "红领巾发货了" ,
+    "你订购的".$_POST['brand']." ".$_POST['item']."已经从".$_POST['country']."发货了。请注意查收。" ,
+    "hlj_service@163.com" ,
+    "1357924680"
+);
+
+$url = "http://v.juhe.cn/sms/send?";
+$tpl_value=urlencode("#item#=".$_POST['brand']." ".$_POST['item']);
+$para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=18258425758&tpl_id=1100&tpl_value=".$tpl_value;
+file_get_contents ( $url."".$para);
+
+?>
+
+<script>
+    $("#country option[value='法国']").attr("selected", true);
+</script>
+
+<li>
+    <input type="file" id="browsefile" style="visibility:hidden" onchange="filepath.value=this.value">
+
+    <input type="button" id="filebutton" value="" onclick="browsefile.click()">
+    <input type="textfield" id="filepath">
+</li>
+
+<?php
+$email = $_SESSION['email'];
+$mail = new SaeMail();
+$mail->quickSend(
+    $email."",
+    "红领巾通知" ,
+    "您在红领巾小助手微信号中订购了".$_SESSION['country']."的".$_SESSION['brand']." ".$_SESSION['item']."。我们会在红领巾们响应后第一时间通知您" ,
+    "hlj_service@163.com" ,
+    "fanganhuan13579"
+);
+
+$url = "http://v.juhe.cn/sms/send?";
+$tpl_value=urlencode("#item#=".$_SESSION['brand']." ".$_SESSION['item']);
+$para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$_SESSION['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+file_get_contents ( $url."".$para);
+?>
+
+<script>
+    var options = {
+        "disableSubmitBtn" : true
+    };
+    var metrics = [
+        [ '#mobile', 'exact-length:11', '必须11位' ],
+        [ '#mobile', 'presence', '手机号码不能为空' ],
+        [ '#email', 'email', '必须是有效邮箱' ],
+        [ '#email', 'presence', '邮箱不能为空' ]
+    ];
+    $("#personForm").nod( metrics,options);
+</script>
+
+<script>
+    $().ready(function() {
+        jQuery.validator.addMethod("isMobile", function(value, element) {
+            var length = value.length;
+            var mobile = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+
+
+        $("#personForm").validate({
+            errorPlacement: function(error, element) {
+                error.appendTo(element.parent());
+            },
+            rules: {
+                we_chat: "required",
+                mobile: {
+                    required:true,
+                    isMobile: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                alipay: "required",
+                alipayName: "required"
+            },
+            messages:{
+                we_chat:"微信号不能为空",
+                mobile:{
+                    required:"手机号码不能为空",
+                    email:"请输入11位的中国大陆手机号码"
+                },
+                email:{
+                    required:"E-mail不能为空",
+                    email:"E-mail地址不正确"
+                },
+                alipay:"请输入绑定支付宝的邮箱或手机",
+                alipayName:"请输入绑定您支付宝的实名"
+
+            }
+        });
+    });
+
+</script>
+
+$mmc=memcache_init();
+if($mmc==false)
+echo "mc init failed\n";
+else
+{
+$trace = memcache_get($mmc,getRequest('FromUserName'));
+if(!trace) {
+$talkArray = unserialize($trace);
+if(count($talkArray)== 10) {
+array_shift($talkArray);
+}
+array_push($talkArray,$this->getRequest('content'));
+$afterSerial = serialize($talkArray);
+
+} else {
+$talkArray = array($this->getRequest('content'));
+$afterSerial = serialize($talkArray);
+}
+memcache_set($mmc,getRequest('FromUserName'),$afterSerial);
+}

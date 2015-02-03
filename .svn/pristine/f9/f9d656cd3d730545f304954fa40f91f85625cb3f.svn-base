@@ -1,0 +1,18 @@
+
+
+<?php
+
+$mmc = memcache_init();
+if ($mmc == false) {
+    echo "mc init failed\n";
+}
+
+
+$a = memcache_get($mmc,"huanhuan_deliverTimes");
+
+
+echo $a['times']."\n";
+echo $a['date']."\n";
+
+echo time() - $a['date'];
+?>

@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: MR X6
+ * Date: 2015/1/13
+ * Time: 20:33
+ */
+
+require_once('../saeDao.php');
+$auction_id = $_REQUEST['auc_id'];
+$param =  array("is_alarmed" => 1,"state"=>"ADMIN_REQUESTED");
+$where = array("auction_id" => $auction_id);
+update($param,$where,"auction");
+$arr = null;
+$arr = array("state" => true);
+$result = json_encode($arr);
+$callback=$_GET['callback'];
+echo $callback."($result)";

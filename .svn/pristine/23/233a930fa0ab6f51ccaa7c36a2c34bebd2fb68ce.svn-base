@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾海外代购</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var lastId = 1;
+            $('#skuArea').on('click','a.ui-icon-plus',function(event){
+                event.preventDefault();
+                var idPre = $(this).parent().attr("id");
+
+                $insert = $(this).parent().clone().attr('id', ( parseInt(lastId) + 1 ) + '_sku');
+                // Modify Sku
+                var b = $insert.find(".ui-block-a label")[0];
+                $(b).attr('for', ( parseInt(lastId) + 1 ) + '_sku')
+                var c = $insert.find(".ui-block-b input")[0];
+                $(c).attr('name', ( parseInt(lastId) + 1 ) + '_sku').attr('id' , ( parseInt(lastId) + 1 ) + '_sku');
+
+                // Modify Price
+                var d = $insert.find(".ui-block-a label")[1];
+                $(d).attr('for', ( parseInt(lastId) + 1 ) + '_q_type_price')
+                var e = $insert.find(".ui-block-b input")[1];
+                $(e).attr('name', ( parseInt(lastId) + 1 ) + '_q_type_price').attr('id' , ( parseInt(lastId) + 1 ) + '_q_type_price');
+
+                // add Minus
+                var f = $insert.find("a");
+                $(f).removeClass("ui-icon-plus").addClass("ui-icon-minus");
+                $(this).parent().parent().append($insert);
+                lastId += 1;
+            });
+            $('#skuArea').on('click','a.ui-icon-minus',function(event){
+                event.preventDefault();
+                $kill = $(this).parent();
+                $kill.remove();
+                // Modify Sku
+            });
+
+        });
+    </script>
+    <style>
+        .skus {
+            position: relative;
+        }
+        .ui-grid-b {
+            height: 50px;
+            width: 100%;
+        }
+        .ui-block-a {
+            line-height: 50px;
+            max-width: 15%;
+        }
+        .ui-block-b {
+            line-height: 50px;
+            min-width: 60%;
+        }
+        .ui-block-c {
+            line-height: 50px;
+            max-width: 25%;
+        }
+
+        .skuButton {
+            max-width: 40px;
+            max-height: 40px;
+            color: blue;
+            position: absolute;
+            top: 30px;
+            right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>发布商品</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <form method="post" action="sellerSucess.php" id="uploadForm" class="ui-field-contain">
+            <ul data-role="listview">
+                <li>
+                    <div class="clearfix">
+                        <label for="q_title">商品标题</label>
+                        <input type="text" name="q_title" id="q_title" value="" placeholder="例：城野医生骨胶原拉紧致眼霜15g" data-clear-btn="true"> 
+                    </div>
+                </li>
+                <li id="skuArea">
+                    <div class="skus" id="1_sku">
+                        <div class="ui-grid-b">
+                            <div class="ui-block-a"><label for="1_q_type">规格</label></div>
+                            <div class="ui-block-b"><input type="text" name="1_q_type" id="1_q_type" value="" placeholder="150ML" data-clear-btn="true"></div>
+                        </div>
+                        <div class="ui-grid-b">
+                            <div class="ui-block-a"><label for="1_q_type_price">价格</label></div>
+                            <div class="ui-block-b"><input type="text" name="1_q_type_price" id="1_q_type_price" value="" placeholder="0.00" data-clear-btn="true"></div>
+                        </div>
+                        <a href="#" class="ui-btn ui-icon-plus ui-btn-icon-notext ui-corner-all skuButton"></a>
+                    </div>
+                </li>
+                <li>
+                    <div class="clearfix">
+                        <label for="q_deliver_method" class="select">请选择发货方式</label>
+                        <select name="q_deliver_method" id="q_deliver_method" data-native-menu="true">
+                                <option value="海外发货">海外发货</option>
+                                <option value="国内发货">国内发货</option>
+                        </select>
+                    </div>
+                </li>
+                <li>
+                    <label for="q_country" class="select">请选择你发布商品购买地</label>
+                    <select name="q_country" id="q_country" data-native-menu="true">
+                            <option value="日本">日本</option>
+                            <option value="美国">美国</option>
+                            <option value="法国">法国</option>
+                            <option value="香港">香港</option>
+                            <option value="澳大利亚">澳大利亚</option>
+                            <option value="英国">英国</option>
+                            <option value="其他">其他</option>
+                    </select>
+                    <label for="q_cat" class="select">请选择你发布商品分类</label>
+                    <select name="q_cat" id="q_cat" data-native-menu="true">
+                            <option value="化妆品">化妆品</option>
+                            <option value="数码">数码</option>
+                            <option value="母婴用品">母婴用品</option>
+                            <option value="服装">服装</option>
+                            <option value="鞋包">鞋包</option>
+                            <option value="其他">其他</option>
+                    </select>
+                </li>
+                <li>
+                </li>
+            </ul>
+            <input type="submit" value="提交" data-transition="slideup"  data-theme="b" id="sub">
+            <script>
+                $().ready(function() {
+                    $("#uploadForm").validate({
+                        errorPlacement: function(error, element) {
+                            error.appendTo(element.parent());
+                        },
+                        rules: {
+                            q_title: "required",
+                            q_price: {
+                                required: true,
+                                number:true
+                            },
+                            q_post: {
+                                required: true,
+                                number:true
+                            }
+                        },
+                        messages:{
+                            q_title:"商品标题不能为空",
+                            q_price:{
+                                required:"商品价格不能为空",
+                                number:"请填写正确的商品价格"
+                            },
+                            q_post:{
+                                required:"商品邮费不能为空",
+                                number:"请填写正确的商品邮费"
+                            }
+                        }
+                    });
+                });
+
+            </script>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

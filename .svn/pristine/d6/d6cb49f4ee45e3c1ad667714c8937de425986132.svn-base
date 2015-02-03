@@ -1,0 +1,39 @@
+<?php
+/**
+ * 使用BCS云存储，保存处理后的图片(注意：需要用户开启云存储服务)
+ */
+require_once 'bcs.class.php';
+
+
+function uploadAnImage($url,$filename) {
+    $host = 'bcs.duapp.com'; //online
+    $ak = 'tRS6YUyfRVx3gtbzh2fw36ef';
+    $sk = 'F9nfxhYuypVRm7kyI50qTvSObDCQ3Ofr';
+    $bucket = 'honglongjin-service';
+
+    $f = new SaeFetchurl();
+    $img_data = $f->fetch($url);
+    $img = new SaeImage();
+    $img->setData($img_data);
+    $img->resize(400);
+    $new_data = $img->exec(); // 执行处理并返回处理后的二进制数据
+    $imageSrc = $new_data;
+
+    /**** 将结果保存到云存储****/
+    $baiduBCS = new BaiduBCS($ak, $sk, $host);
+    //object name
+    $fileFinal = $filename.'.jpg';//填入您要保存的名称
+    $object = '/' . $fileFinal; //object必须以‘/’开头
+
+    //将图片存入云存储
+    //$imageSrc即为请求image服务成功后返回的图片二进制数据
+    $baiduBCS->create_object_by_content($bucket, $object, $imageSrc);
+    $acl = BaiduBCS::BCS_SDK_ACL_TYPE_PUBLIC_READ;
+    $baiduBCS->set_object_acl($bucket, $object, $acl);
+}
+
+
+uploadAnImage("http://www.3dmgame.com/uploads/allimg/141202/153_141202163742_3_lit.jpg","hello");
+?>
+
+

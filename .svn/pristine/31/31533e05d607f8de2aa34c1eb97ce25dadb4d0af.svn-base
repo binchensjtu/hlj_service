@@ -1,0 +1,258 @@
+#price, #post_price {
+    height: auto;
+    margin-left: 10px;
+}
+#method {
+    display: inline-block;
+    font-size: 0.8em;
+    background-color: #FF0000;
+    color: white;
+    padding: 1px;
+
+}
+#price {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #FF0000;
+}
+#post_price {
+    font-size: 0.85em;
+    display: inline-block;
+}
+
+
+#price_button {
+    float: left;
+    width: 50%;
+    margin-top: 10px;
+    position: absolute;
+    right: 40px;
+}
+
+#up_button_area {
+    width: 100%;
+}
+
+#price_area {
+    float: left;
+    height: 60px;
+    margin-top: 10px;
+
+}
+
+#up_button_area {
+    background-color: white;
+    opacity: 0.92;
+    border-top: 1px solid #e0e0ea;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index:1;
+}
+
+#buy {
+    margin-left: 50px;
+    width: 90%;
+    height: 48px;
+    border-radius: 0.5em;
+    font-size: 16px;
+    z-index: 3;
+    opacity: 1;
+    background-color: #FF0000;
+    color: white;
+    border: 1px solid #FF0000;
+}
+
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+.clearfix {display: inline-block;}  /* for IE/Mac */
+
+
+#deliverFloat {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    background-color: #efeff5;
+    height: 380px;
+    top: 45px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1000;
+    visibility: hidden;
+}
+
+#deliverFloatBottom {
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    display: block;
+    z-index: 999;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.65;
+    border: 1px solid;
+
+}
+
+.pay_alert {
+    font-family: "Microsoft YaHei";
+}
+
+#info {
+    text-align: left;
+}
+#price_total,#price_info,#price_each,#price_post {
+    margin: 0;
+    margin-left: 10px;
+    margin-right: 10px;
+    font-family: "Microsoft YaHei";
+    font-size: 0.9em;
+    line-height: 25px;
+    height: 25px;
+}
+#price_each {
+    border-top: 1px solid #b2b2cc;
+    padding-top: 24px;
+    font-weight: lighter;
+}
+#price_post {
+    font-weight: lighter;
+}
+#price_total {
+    border-bottom: 1px solid #b2b2cc;
+    font-weight: bolder;
+    margin-bottom: 2px;
+    padding-bottom: 5px;
+}
+#price_info {
+    padding-bottom: 10px;
+    padding-top: 4px;
+    font-weight: bolder
+}
+#phonebox {
+    margin-left: 10px;
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid #b2b2cc;
+    font-size: 0.9em;
+    margin-top: -8px;
+    padding-left: 10px;
+}
+
+#subit {
+    position: absolute;
+    right: 10px;
+    top: 245px;
+    width: 44%;
+    font-size: 1.1em;
+    border:none;
+    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background-color: #0042fe;
+    opacity: 0.8;
+    color: white;
+
+}
+
+#subcancel {
+    position: absolute;
+    left: 10px;
+    top: 245px;
+    width: 44%;
+    font-size: 1.1em;
+    border:none;
+    line-height: 50px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 5px;
+    background-color: white;
+    border: 1px solid #b2b2cc;
+}
+.error {
+    color: red;
+}
+
+.op {
+    background-color: #b2b2cc;
+    line-height: 30px;
+    padding: 5px 9px 3px 9px;
+    position: relative;
+    top:4.5px;
+    font-size: 1.5em;
+    border: none;
+}
+
+#opInput {
+    border: none;
+    height: 35px;
+    width: 80px;
+    text-align: center;
+    font-size: 1em;
+}
+
+#countMani {
+    position: absolute;
+    top: 46px;
+    right: 10px;
+}
+
+#countP {
+    margin-bottom: 5px;
+    color: grey;
+    font-size: 0.89em;
+}
+
+#minus {
+    padding-left: 12px;
+    padding-right: 12px;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+#plus {
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    top:4.25px;
+}
+
+#priceNum {
+    color: #0042fe;
+}
+
+#deliverUl {
+    max-width: 95%;
+
+    position: relative;
+    left: 2.5%;
+    right: 2.5%;
+}
+
+#closeDeliver {
+    position: absolute;
+    left: 2.5%;
+    top: 5px;
+}
+
+#detailFloat {
+    position: fixed;
+    left: 10px;
+    right: 10px;
+    background-color: #efeff5;
+    height: 380px;
+    top: 45px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 1000;
+    visibility: visible;
+}

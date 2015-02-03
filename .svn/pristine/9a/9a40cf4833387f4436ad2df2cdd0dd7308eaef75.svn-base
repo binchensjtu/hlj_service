@@ -1,0 +1,54 @@
+<?php
+
+session_start();
+
+$_SESSION['country']=$_POST['country'];
+$_SESSION['brand']=$_POST['brand'];
+$_SESSION['item']=$_POST['item'];
+$_SESSION['information']=$_POST['information'];
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>收货信息</h1>
+    </div>
+
+    <div class="ui-body ui-body-a content-it">
+
+        <ul data-role="listview">
+            <li>
+                <h1>第一次使用，红领巾需要您填写基本信息</h1><br>
+                <label for="we_chat">微信号(速递红领巾会联系你)</label>
+                <input type="text" name="text-basic" id="we_chat" value="">
+                <label for="mobile">手机号</label>
+                <input type="text" name="text-basic" id="mobile" value=""> 
+                <label for="email">常用邮箱</label>
+                <input type="text" name="text-basic" id="email" value=""> 
+                <label for="alipay">支付宝账号（担保、退货靠这个）</label>
+                <input type="text" name="text-basic" id="alipay" value=""> 
+
+            </li>
+        </ul>
+        <a href="reg3.php" data-transition="slideup" class="ui-btn">下一步</a>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+</body>
+</html>

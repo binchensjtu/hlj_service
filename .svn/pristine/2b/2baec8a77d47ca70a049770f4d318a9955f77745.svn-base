@@ -1,0 +1,72 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/6
+ * Time: 上午11:50
+ */
+require_once('./utils/simple_html_dom.php');
+
+
+function getKaiyuan() {
+    echo "开元物流信息\n";
+    $url = 'http://www.kaiyuan.eu/?go=dhlorder&email=liang.lerui@163.com&ordernum=133590';
+    $html = new simple_html_dom();
+    $html->load_file($url);
+    $fuck_it = array();
+    foreach($html->find('p img') as $element) {
+        array_push($fuck_it,$element->find('text'));
+    }
+
+    foreach($fuck_it[0] as $element) {
+        echo $element."\n";
+    }
+    $html->clear();
+    unset($html);
+}
+
+
+
+function getBPost() {
+    echo "B_POST"."\n";
+    $url3 = 'http://www.depostlaposte.be/bpi/track_trace/find.php?search=s&lng=en&trackcode=30100795000000000455702302';
+    $html3 = new simple_html_dom();
+    $html3->load_file($url3);
+    if($html3 && is_object($html3) && isset($html3->nodes)) {
+        $fuck = array();
+        $fuck3 = array();
+        foreach($html3->find('status') as $element) {
+            $val = $element->find('en text');
+            $val3 = $element->find('datetime text');
+            array_push($fuck,$val[0]);
+            array_push($fuck3,$val3[0]);
+        }
+        $fuck = array_unique($fuck);
+        $fuck3 = array_filter($fuck3);
+        $fuck4 = array();
+        $fuck5 = array();
+        foreach($fuck3 as $val) {
+            array_push($fuck4,$val);
+        }
+        foreach($fuck as $val) {
+            array_push($fuck5,$val);
+        }
+        for($i=0; $i<count($fuck4); $i++) {
+            echo $fuck5[$i]."\t\t".$fuck4[$i]."\n";
+        }
+        $html3->clear();
+        unset($html3);
+    }
+
+}
+
+
+getKaiyuan();
+getBPost();
+
+
+
+
+
+
+

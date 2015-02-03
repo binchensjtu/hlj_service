@@ -1,0 +1,16 @@
+
+#head {
+    text-align: center;
+}
+
+
+img {max-width: 100%;}
+
+.progress li {
+    display: inline-block;
+
+}
+
+.progress li span {
+    border-radius: 50%;
+}

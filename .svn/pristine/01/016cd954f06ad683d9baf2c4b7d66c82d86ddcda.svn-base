@@ -1,0 +1,10 @@
+
+
+<?php
+
+$a = "http://bcs.duapp.com/honglongjin-service/oMD0Nt9zKQGtfL1V6VtCgNkjr19U0.58895300%201418974180.jpg";
+$a = str_replace(" ","%20",$a);
+
+echo $a;
+
+?>

@@ -1,0 +1,14 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+$pure = 'a:1:{s:10:"pic_upload";s:3:"yes";}';
+$out = unserialize($pure);
+print $out['pic_upload'];
+
+
+
+?>

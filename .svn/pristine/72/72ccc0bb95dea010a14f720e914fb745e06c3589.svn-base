@@ -1,0 +1,13 @@
+$(document).ready(function(){
+    if($("#brand").val()=="") {
+        if( isNaN($("#country").val())) {
+            $("#brand").focus();
+        }
+
+    }
+    $("#country").change(function(){
+        alert("fuck");
+        $("#country").blur();
+        $("#brand").focus();
+    });
+});

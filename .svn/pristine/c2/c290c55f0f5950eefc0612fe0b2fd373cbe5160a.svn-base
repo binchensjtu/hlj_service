@@ -1,0 +1,66 @@
+<?php
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <title></title>
+</head>
+<style>
+    #fuck {
+        width: 100%;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        z-index: 3;
+        height: 100%;
+    }
+    #hello {
+        background: red;
+        color: white;
+        padding: 5px 5px 5px 10px;
+        position: fixed;
+        top: -10px;
+        left: 0;
+        z-index: 100;
+        max-height: 1000px;
+    }
+    #outer {
+        position: relative;
+
+    }
+</style>
+<body>
+<div id="outer">
+    <p id="hello">订单金额合计<?php echo $_POST['totalHidden'] ?>元，购买<?php echo (int)$_POST['totalHidden'] ?>朵小红花，才能完成交易哦！╭(￣▽￣)╯</p>
+    <iframe src="http://wd.koudai.com/item.html?itemID=664015408&wfr=wx" frameborder="0" name="fuck" id="fuck" onload="iFrameHeight();" ></iframe>
+</div>
+<script>
+    function iFrameHeight() {
+
+        var ifm= document.getElementById("fuck");
+
+        var subWeb = document.frames ? document.frames["fuck"].document :
+
+            ifm.contentDocument;
+
+        if(ifm != null && subWeb != null) {
+
+            ifm.height = subWeb.body.scrollHeight;
+
+        }
+
+    }
+
+
+</script>
+</body>
+</html>
+
+
+</body>
+</html>

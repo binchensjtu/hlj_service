@@ -1,0 +1,54 @@
+
+#head {
+    text-align: center;
+}
+
+
+
+.progress li {
+    display: inline-block;
+
+}
+
+.progress li span {
+    border-radius: 50%;
+}
+
+label.error {
+    background: #fcc;
+    display: inline-block;
+    padding: 2px 9px;
+    margin-left: 0px;
+    margin-top: 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    float: left;
+    clear: right;
+}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+
+.ui-icon-loading {
+    background: url("http://7u2les.com1.z0.glb.clouddn.com/ajax-loader.gif");
+}
+
+.us {background: url(http://testhlj.qiniudn.com/us.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.jp {background: url(http://testhlj.qiniudn.com/jp.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.hk {background: url(http://testhlj.qiniudn.com/hk.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.fr {background: url(http://testhlj.qiniudn.com/fr.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.de {background: url(http://testhlj.qiniudn.com/de.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.cn {background: url(http://testhlj.qiniudn.com/cn.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+
+
+
+
+

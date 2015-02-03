@@ -1,0 +1,28 @@
+<?php
+$mysql = new SaeMysql();
+// 插入代购国家、品牌、商品、备注
+$sql = "INSERT  INTO `auction` (`country`, `brand`, `item`, `information`, `auc_time`) VALUES ('".$_POST['country']."','".$_POST['brand']."','". $_POST['item']."','".$_POST['information']."',NOW() )";
+$mysql->runSql($sql);
+if ($mysql->errno() != 0) {
+    die("Error:" . $mysql->errmsg());
+}
+$mysql->closeDb();
+$mail = new SaeMail();
+$mail->quickSend(
+    "xhclybm@163.com" ,
+    "红领巾发货了" ,
+    "你订购的".$_POST['brand']." ".$_POST['item']."已经从".$_POST['country']."发货了。请注意查收。" ,
+    "hlj_service@163.com" ,
+    "1357924680"
+);
+
+$url = "http://v.juhe.cn/sms/send?";
+$tpl_value=urlencode("#item#=".$_POST['brand']." ".$_POST['item']);
+$para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=18258425758&tpl_id=1100&tpl_value=".$tpl_value;
+file_get_contents ( $url."".$para);
+
+?>
+
+<script>
+    $("#country option[value='法国']").attr("selected", true);
+</script>

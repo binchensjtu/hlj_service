@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+
+
+function invcode($length,$num=1) {
+    $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $j = 0;
+    $code_arr = array();
+    while($j<$num){
+        $random = '';
+        for ($i = 0; $i < $length; $i++) {
+            $random .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+        }
+        $code_arr[$j] = $random;
+        $j++;
+    }
+    return $code_arr;
+}
+
+$arr = invcode(16,10);
+print_r($arr);
+
+
+
+?>

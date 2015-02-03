@@ -1,0 +1,6 @@
+.us {background: url(http://testhlj.qiniudn.com/us.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.jp {background: url(http://testhlj.qiniudn.com/jp.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.hk {background: url(http://testhlj.qiniudn.com/hk.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.fr {background: url(http://testhlj.qiniudn.com/fr.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.de {background: url(http://testhlj.qiniudn.com/de.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}
+.cn {background: url(http://testhlj.qiniudn.com/cn.png) 5px 50% no-repeat; padding: 3px 0 3px 35px; font-size: 16px;}

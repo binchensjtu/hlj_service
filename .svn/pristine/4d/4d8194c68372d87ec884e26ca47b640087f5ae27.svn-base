@@ -1,0 +1,12 @@
+<?php
+
+require_once('saeDao.php');
+$where = array("phone"=>'');
+delete($where,"logistic");
+
+$where2 = array("item_info"=>'',"item_info"=>'NULL');
+delete($where2,"auction");
+
+
+
+?>

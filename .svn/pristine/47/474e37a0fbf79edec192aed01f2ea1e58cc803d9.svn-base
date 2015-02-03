@@ -1,0 +1,54 @@
+
+#head {
+    text-align: center;
+}
+
+
+
+.progress li {
+    display: inline-block;
+
+}
+
+.progress li span {
+    border-radius: 50%;
+}
+
+label.error {
+    background: #fcc;
+    display: inline-block;
+    padding: 2px 9px;
+    margin-left: 0px;
+    margin-top: 2px;
+    border-radius: 5px;
+    font-weight: bold;
+    float: left;
+    clear: right;
+}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after {
+    clear:both;
+    overflow:hidden;
+}
+.clearfix {
+    zoom:1; /* for ie6 & ie7 */
+}
+
+#picdiv{
+    text-align: center;
+}
+img#itemPic {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    max-width: 30%;
+}
+
+img {
+    max-width: 100%;
+}
+
+
+

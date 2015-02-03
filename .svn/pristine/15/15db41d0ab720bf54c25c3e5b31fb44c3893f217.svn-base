@@ -1,0 +1,399 @@
+<?php
+
+
+require('./src/Wechat.php');
+require('bcs.class.php');
+require('imgutil.php');
+require_once('saeDao.php');
+
+
+class MyWechat extends Wechat
+{
+
+    /**
+     * 用户关注时触发，回复「欢迎关注」
+     *
+     * @return void
+     */
+    protected function onSubscribe()
+    {
+        $this->responseText('欢迎访问红领巾！
+我们是就读于世界各地的中国留学生，为生活在中国大陆的小伙伴们提供海外代购服务。只有想不到，没有买不到。
+回复“买买买”，即刻开启专属于你的代购之旅吧。
+回复“呼叫小助手”，获取更多帮助。');
+    }
+
+    /**
+     * 上报地理位置时触发,回复收到的地理位置
+     *
+     * @return void
+     */
+    protected function onEventLocation()
+    {
+        $this->responseText('收到了位置推送：' . $this->getRequest('Latitude') . ',' . $this->getRequest('Longitude'));
+    }
+
+    /**
+     * 收到文本消息时触发，回复收到的文本消息内容
+     *
+     * @return void
+     */
+    protected function onText()
+    {
+        // 好吧，强大的缓存开始了
+
+
+
+        $keyword = $this->getRequest('content');
+        $this->memContext($this->getRequest('FromUserName'),$keyword);
+        if ($keyword == "买买买" || $keyword == "我要买" || $keyword == "下单" ) {
+            $fromUsername = $this->getRequest('FromUserName');
+            $contentStr = "<a href='http://mytaotao123.sinaapp.com/reg.php?uwid=$fromUsername'>提交购买表单</a>";
+            $this->responseText($contentStr);
+        }
+        if ($keyword == "查订单") {
+            $contentStr = "<a href='http://m.kuaidi100.com/index_all.html?type=EMS&postid=EM019035514JP'>查询我的订单</a>";
+            $this->responseText($contentStr);
+        }
+        if ($keyword == "我要发布") {
+            $where = array("wechat_id"=>$this->getRequest('FromUserName'));
+            $out = get($where,"seller");
+            if($out) {
+                if($out[0]["level"] == '3') {
+                    $this->setMemControl($this->getRequest('FromUserName'),"pic_upload","yes");
+                    $this->setMemControl($this->getRequest('FromUserName'),"pic_count",0);
+                    $this->deletePicURLArray($this->getRequest('FromUserName'),null);
+                    $contentStr = "请上传你要发布的商品图片，最多三张";
+                    $this->responseText($contentStr);
+                }
+            }else {
+                    $this->responseText("你还木有权限发布商品，如果已经获得邀请码，请输入“我有邀请码”");
+            }
+        }
+        if ($keyword == "我有邀请码") {
+            $this->responseText("请输入你获得的10位有效邀请码");
+        }
+        if ($this->getLastMemTextUserSaid($this->getRequest('FromUserName')) == "我有邀请码") {
+            // 验证邀请码是否有效
+            $where = array("code"=>$keyword);
+            $out = get($where,"yaoqingma");
+            if($out) {
+                if($out[0]["valid"] == '1') {
+                    $fromUsername = $this->getRequest('FromUserName');
+                    $contentStr = "你输入的邀请码有效[得意]。
+<a href='http://mytaotao123.sinaapp.com/sellerReg.php?uwid=$fromUsername'>点击填写该表单</a>
+你将成为红领巾==！";
+                    $this->responseText($contentStr);
+                }else {
+                    $this->responseText("你输入的邀请码已经被别人使用");
+                }
+            }else {
+                $this->responseText("你输入的邀请码无效");
+            }
+        }
+        if ($keyword == "啊") {
+            if($this->getMemControl($this->getRequest('FromUserName'),"pic_upload")=="yes") {
+                $this->setMemControl($this->getRequest('FromUserName'),"pic_upload","no");
+                $contentStr = "<a href='http://mytaotao123.sinaapp.com/sellerUpload.php?uwid=".$this->getRequest('FromUserName')."'>请填写轻发布发布表单</a>";
+                $this->responseText($contentStr);
+            }
+        }
+        if ($keyword == "生成邀请码") {
+            $where = array("wechat_id"=>$this->getRequest('FromUserName'));
+            $out = get($where,"super");
+
+            if($out[0]["level"] == '3') {
+                $invcode = $this->invcode(10,10);
+                for($i =0; $i< count($invcode); $i++) {
+                    $datetime = date('Y-m-d H:i:s',time());
+                    $para = array("code"=>$invcode[$i],"valid"=>'1',"gendate"=>$datetime);
+                    insert($para,"yaoqingma");
+                }
+                $this->responseText("报告大大，我一次性生成了10个邀请码！");
+            }else {
+                $this->responseText("这个功能只有管理员才能使用哦。");
+            }
+        }
+        if ($keyword == "邀请码") {
+            $where = array("wechat_id"=>$this->getRequest('FromUserName'));
+            $out = get($where,"super");
+
+            if($out[0]["level"] == '3') {
+                $where = array("valid"=>'1');
+                $out = get($where,"yaoqingma",1);
+                if($out) {
+                    $this->responseText($out[0]['code']);
+                }else {
+                    $this->responseText("[流泪]没有请邀请码了，输入“生成邀请码”吧");
+                }
+
+            }else {
+                $this->responseText("这个功能只有管理员才能使用哦。");
+            }
+        }
+        if ($keyword == "刚才我说了啥") {
+            $contentStr = $this->getLastMemTextUserSaid($this->getRequest('FromUserName'));
+            $this->responseText($contentStr);
+        }
+        if ($keyword == "查物流") {
+            $this->responseText('查物流请点击：<a href="www.baidu.com">查物流</a>');
+        }
+        if ($keyword == "我要退款") {
+            $this->responseText('退款申诉请点击：<a href="www.baidu.com">我要退款</a>');
+        }
+        if ($keyword == "呼叫小助手") {
+            $this->responseText('HI！我是红领巾小助手。
+回复“1”：了解消费者保障。
+回复“2”：了解定价与邮费。
+回复“3”：了解付款方式。
+回复“4”：了解售后服务。
+回复“买买买”：
+召唤红领巾为你代购。
+回复“查订单”：
+查看你的订单信息。
+回复“查物流”：
+查看你的物流跟踪信息。
+回复“我要退款”：
+提起退款申诉。');
+        }
+        if ($keyword == "1") {
+            $this->responseText('【消费者保障】
+①当地正品货源
+红领巾们是来自世界各高校的中国留学生，接受订单后奔赴当地专柜采购、寄运，保证原滋原味。
+②直邮更放心
+为保证宝贝又快又安全地漂洋过海来到你身边，红领巾们会选择当地口碑良好的快递公司为你寄送。
+③如假包退
+红领巾代购商品均为正品。若发现假货，请提起售后申诉，经判定属实后全额退款。');
+        }
+        if ($keyword == "2") {
+            $this->responseText('【商品价格与邮费】
+①价格与邮费透明
+订单价格=商品价格+邮费，方便比价、一目了然。
+②当地第一手价格
+红领巾们报价基于当地最新鲜价格，如穿越般令人激动的价格体验。
+③说出你对价格的要求
+红领巾们会给你提供合理的价格收费。当然，你也可以在“买买买”环节备注你的价格上限，方便你我他。');
+        }
+        if ($keyword == "3") {
+            $this->responseText('【付款方式】
+支付宝付款，随时随地全球购。
+①有货就能代购
+红领巾们收到订单需求后火速行动，确认当地有货后，返回确认有货通知、并告知此次交易的商品价格和邮费。
+②支付宝主动收款更便捷
+确认下单后，你将收到支付宝的收款提示，轻松完成付款。');
+        }
+        if ($keyword == "4") {
+            $this->responseText('【售后服务】
+①如假包退
+红领巾代购商品均为正品。若发现假货，请提起售后申诉，经判定属实后全额退款。
+②破损补寄
+请当着快递哥哥的面，打开包裹检查货品无误后签收；若包裹破损或与购买商品不符，请拒收快递，并提出售后申诉，红领巾会尽快补寄相应商品。快递签收后，就不能已破损为由提起补寄/退款申请咯。
+③代购特殊性说明
+代购商品具有特殊性，不提供无理由退换货服务。红领巾们非常感恩你的理解！
+④售后申诉入口
+回复“我要退款”，或直接点击：<a href="www.baidu.com">我要退款</a>');
+        }
+        else {
+            $url = "http://api.mrtimo.com/Simsimi.ashx?parm=";
+            $keyword = $this->getRequest('content');
+            $content = file_get_contents ( $url."".$keyword);
+            if(strpos($content, "莫队长") !== false){
+                $this->responseText('我竟然无言以对！');
+            }else {
+                $this->responseText('' . $content);
+            }
+
+        }
+
+    }
+
+    /**
+     * 收到图片消息时触发，回复由收到的图片组成的图文消息
+     *
+     * @return void
+     */
+    protected function onImage()
+    {
+        $baiduURL = $this->getRequest('FromUserName').microtime();
+        uploadAnImage($this->getRequest('picurl'),$baiduURL);
+        $acURL = "http://bcs.duapp.com/honglongjin-service/".$baiduURL.".jpg"; // 图片在百度云存储的真实地址
+        if ($this->getMemControl($this->getRequest('FromUserName'),"pic_upload")=="yes"){        // 用户在上传图片状态
+            $pic_al_count = $this->getMemControl($this->getRequest('FromUserName'),"pic_count"); // 取得当前已经上传的图片数量
+            // 缓存图片地址
+            $this->setPicURLArray($this->getRequest('FromUserName'),$acURL);
+            // 我尼玛，微信好难测试
+            $this->setMemControl($this->getRequest('FromUserName'),"pic_count",$pic_al_count+1); // 事件发生表示已经上传成功+1
+            $contentStr = "你已经上传了".($pic_al_count + 1)."张图片[得意]，还可以继续上传".(3-($pic_al_count + 1))."张图片，或者输入“啊”结束上传。"; //啊创意好
+            if($pic_al_count + 1 == 3) {                                                         // 达到三张及时改变状态
+                $this->setMemControl($this->getRequest('FromUserName'),"pic_upload","no");
+                $contentStr = "<a href='http://mytaotao123.sinaapp.com/sellerUpload.php?uwid=".$this->getRequest('FromUserName')."'>请填写轻发布发布表单</a>";
+
+            }
+            $this->responseText($contentStr);
+        }
+        $this->responseText("你上传给红领巾小助手一个图片==！");
+
+    }
+
+    /**
+     * 收到地理位置消息时触发，回复收到的地理位置
+     *
+     * @return void
+     */
+    protected function onLocation()
+    {
+        $this->responseText('收到了位置消息：' . $this->getRequest('location_x') . ',' . $this->getRequest('location_y'));
+    }
+
+    /**
+     * 收到链接消息时触发，回复收到的链接地址
+     *
+     * @return void
+     */
+    protected function onLink()
+    {
+        $this->responseText('收到了链接：' . $this->getRequest('url'));
+    }
+
+    /**
+     * 收到语音消息时触发，回复语音识别结果(需要开通语音识别功能)
+     *
+     * @return void
+     */
+    protected function onVoice()
+    {
+        $this->responseText('收到了语音消息,识别结果为：' . $this->getRequest('Recognition'));
+    }
+
+    /**
+     * 收到未知类型消息时触发，回复收到的消息类型
+     *
+     * @return void
+     */
+    protected function onUnknown()
+    {
+        $this->responseText('收到了未知类型消息：' . $this->getRequest('msgtype'));
+    }
+    private function memContext($fromUser, $keyword)
+    {
+        $mmc = memcache_init();
+        if ($mmc == false)
+            echo "mc init failed\n";
+        $log = memcache_get($mmc, $fromUser);
+        if ($log) {
+            array_push($log, $keyword);
+            if (count($log) == 10) {
+                array_shift($log);
+            }
+        } else {
+            $log = array($keyword);
+        }
+        memcache_set($mmc, $fromUser, $log);
+    }
+
+    private function getLastMemTextPic($fromUsername) {
+        $mmc = memcache_init();
+        $log = memcache_get($mmc, $fromUsername);
+        $countLast = count($log) - 1;
+        $lastWord = $log[$countLast];
+        return $lastWord;
+    }
+    private function getLastMemTextUserSaid($fromUsername) {
+        $mmc = memcache_init();
+        $log = memcache_get($mmc, $fromUsername);
+        if(count($log) == 1) {
+            $lastWord = "你啥都没说==！我读书少，请不要骗我";
+            return $lastWord;
+        }else {
+            $countLast = count($log) - 2;
+            $lastWord = $log[$countLast];
+            return $lastWord;
+        }
+
+    }
+
+    private function getLastMemTextUserInput($fromUsername) {
+        $mmc = memcache_init();
+        $log = memcache_get($mmc, $fromUsername);
+        $countLast = count($log) - 1;
+        $lastWord = $log[$countLast];
+        return $lastWord;
+    }
+
+    // 写入控制逻辑
+    private function setMemControl($fromUsername,$type,$command) {
+        $mmc = memcache_init();
+        $log = null;
+        $pure = memcache_get($mmc, $fromUsername."_control").'';
+        $outcome = unserialize($pure);
+        if(count($outcome) > 0) {
+            $outcome[$type] = $command;
+            $log = serialize($outcome);
+        }else {
+            $log = serialize(array($type => $command));
+        }
+        memcache_set($mmc, $fromUsername."_control", $log);
+
+    }
+
+    // 写入图片数组
+    private function setPicURLArray($fromUsername,$picURL) {
+        $mmc = memcache_init();
+        $picArray = memcache_get($mmc, $fromUsername."_pic");
+        if(!empty($picArray)) {
+            array_push($picArray,$picURL);
+        }else {
+            $picArray = array($picURL);
+        }
+        memcache_set($mmc, $fromUsername."_pic", $picArray);
+    }
+    // 读取图片数组
+    private function getPicURLArray($fromUsername) {
+        $mmc = memcache_init();
+        memcache_get($mmc, $fromUsername."_pic");
+    }
+
+    // 清除图片数组
+    private function deletePicURLArray($fromUsername) {
+        $mmc = memcache_init();
+        memcache_set($mmc, $fromUsername."_pic",null);
+    }
+
+    // 读取控制逻辑
+    private function getMemControl($fromUsername,$type) {
+        $mmc = memcache_init();
+        $pure = memcache_get($mmc, $fromUsername."_control").'';
+        $outcome = unserialize($pure);
+        return $outcome[$type];
+
+    }
+
+    private function getCounter() {
+        try{
+            $c = new SaeCounter();
+        }catch(Exception $ex){
+            die($ex->getMessage());
+        }
+        return $c;
+    }
+    private function invcode($length,$num=1) {
+        $chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        $j = 0;
+        $code_arr = array();
+        while($j<$num){
+            $random = '';
+            for ($i = 0; $i < $length; $i++) {
+                $random .= $chars[ mt_rand(0, strlen($chars) - 1) ];
+            }
+            $code_arr[$j] = $random;
+            $j++;
+        }
+        return $code_arr;
+    }
+
+
+
+}
+
+$wechat = new MyWechat('FangXiang', TRUE);
+$wechat->run();

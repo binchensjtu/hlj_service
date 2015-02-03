@@ -1,0 +1,53 @@
+<?php
+
+session_start();
+
+$_SESSION['receiver']=$_POST['receiver'];
+$_SESSION['address']=$_POST['address'];
+$_SESSION['phone']=$_POST['phone'];
+$_SESSION['zipcode']=$_POST['zipcode'];
+
+// 开始插入数据
+
+// 插入个人信息
+$mysql = new SaeMysql();
+$sql = "INSERT  INTO `user_info` (`wechat_id`, `wechat_num`, `mobile`, `email`, `alipay`, `logistic_default`, `date`) VALUES ('".$_SESSION['uwid']."','".$_SESSION['we_chat']."','". $_SESSION['mobile']."','".$_SESSION['email']."','". $_SESSION['alipay']."','". $_SESSION['logistic_default']."',NOW() )";
+$mysql->runSql($sql);
+if ($mysql->errno() != 0) {
+    die("Error:" . $mysql->errmsg());
+}
+$mysql->closeDb();
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>收到了，敬礼！</h1>
+        <?php echo $sql;?>
+    </div>
+    <?php echo $_SESSION['receiver']." ".$_SESSION['address']." ".$_SESSION['phone']." ".$_SESSION['zipcode'];?>
+    <div class="ui-body ui-body-a content-it">
+        <img src="./img/red.jpg" alt=""/><br>
+        <p>请求已经收到，纽约的红领巾们正在赶往第五大道进行采购！</p>
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+</body>
+</html>

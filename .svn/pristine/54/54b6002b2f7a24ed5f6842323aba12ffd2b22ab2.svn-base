@@ -1,0 +1,338 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/4
+ * Time: 下午6:57
+ */
+// 取得所有上架商品
+require_once('saeDao.php');
+$uwid = $_REQUEST['uwid'];
+$where2 = array("seller_wechat_id"=>$uwid,"state"=>"WAIT_SELLER_SEND_GOODS");
+$out2 = get($where2,"auction");
+$waitCount = count($out2);
+$mmc = memcache_init();
+if ($mmc == false) {
+    echo "mc init failed\n";
+}
+function utf_substr($str,$len)
+{
+    for($i=0;$i<$len;$i++)
+    {
+        $temp_str=substr($str,0,1);
+        if(ord($temp_str) > 127)
+        {
+            $i++;
+            if($i<$len)
+            {
+                $new_str[]=substr($str,0,3);
+                $str=substr($str,3);
+            }
+        }
+        else
+        {
+            $new_str[]=substr($str,0,1);
+            $str=substr($str,1);
+        }
+    }
+    return join($new_str,'');
+}
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾海外代购</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/another.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <style>
+        .ui-li-count {
+            background-color: red;
+            border: none;
+            border-radius: 0.5em;
+            width: 14px;
+            height: 14px;
+            font-size: 0.2em !important;
+            right: 2px;
+            top: 15px;
+            z-index: 1000;
+        }
+
+        #mani {
+            z-index: 10 !important;
+        }
+
+        #status {
+            z-index: 1000 !important;
+        }
+
+        .ui-block-title {
+            font-size: 0.8em;
+            right: 0;
+            width: 50% !important;
+            padding: 5px;
+            padding-left: 9px;
+        }
+
+        .mani-deliver, .mani-detail {
+            height: 30px;
+            font-size: 0.8em;
+            top: 5px;
+        }
+
+        .ui-block-img {
+            max-width: 25%;
+        }
+
+        .ui-block-mani {
+            max-width: 25%;
+        }
+        .ui-grid-b {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            border-bottom: 1px solid #a5a5a5;
+        }
+        #dFloat {
+            position: fixed;
+            left: 10px;
+            right: 10px;
+            background-color: #efeff5;
+            height: 450px;
+            top: 45px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+            visibility: hidden;
+        }
+        #closeDetail {
+            position: absolute;
+            left: 2.5%;
+            top: 5px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="deliverFloatBottom">
+
+</div>
+<div data-role="page" id="testpage">
+    <div data-role="header" data-position="fixed">
+        <div data-role="navbar">
+            <ul data-role="listview" data-count-theme="b" id="status">
+                <li></li>
+                <li></li>
+                <li><span class="ui-li-count"><?php echo $waitCount ?></span></li>
+                <li></li>
+            </ul>
+            <ul id="mani">
+                <li><a href="./seller_manager_off.php?uwid=<?php echo $uwid ?>" data-ajax='false'>在售</a></li>
+                <li><a href="./seller_manager_on.php?uwid=<?php echo $uwid ?>" data-ajax='false'>已删除</a></li>
+                <li><a href="#" class="ui-btn-active">待发货</a></li>
+                <li><a href="#">已发货</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /header -->
+    <div class="ui-content" role="main">
+        <div id="item-wrapper">
+            <?php
+            $mmc = memcache_init();
+            if ($mmc == false) {
+                echo "mc init failed\n";
+            }
+            for($i= $waitCount; $i >= 0; $i--) {
+                if($out2[$i]['tid'] != '') {
+                    $info_pack = memcache_get($mmc, $out2[$i]['tid']."_info");
+                    $item_pack = memcache_get($mmc, $info_pack['num_iid']."_info");
+                    ?>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a ui-block-img">
+                            <a href='<?php echo $item_pack['detail_url'] ?>'>
+                                <img
+                                    src='<?php echo $info_pack['pic_thumb_path'] ?>'
+                                    style="width:80px;max-height: 80px;">
+                            </a>
+                        </div>
+                        <div class="ui-block-b ui-block-title"><p><?php echo utf_substr($out2[$i]['item_info'],18)."..."?></p>
+                            <p><?php echo $info_pack['receiver_name'] ?>,<?php echo $info_pack['receiver_mobile'].",".$info_pack['receiver_state'].$info_pack['receiver_city'].$info_pack['receiver_district']."..."?></p>
+                        </div>
+                        <div class="ui-block-c ui-block-mani">
+                            <button class='mani-deliver' id='<?php echo $out2[$i]['tid'] ?>'>发货</button>
+                            <button class='mani-detail' id='<?php echo $out2[$i]['tid'] ?>'>详情</button>
+                        </div>
+                    </div>
+                <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+    <div id="deliverFloat">
+        <p class="pay_alert">购买提醒</p>
+        <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="closeDeliver">No text</a>
+        <ul data-role="listview" id="deliverUl">
+            <li>
+                <select name="native_overseas" id="native_overseas" data-native-menu="true">
+                        <option value="no"><-请选择发货方式-></option>
+                        <option value="native">国内发货</option>
+                        <option value="overseas">国外发货</option>
+                </select>
+                <select name="deliver_company" id="deliver_company" data-native-menu="true" disabled="true">
+                        <option value="no"><-请选择快递公司-></option>
+                </select>
+            </li>
+            <li>
+                <input type="text" name="deliver_code" id="dc" value="" placeholder="请输入订单号"> 
+            </li>
+            <li>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <a href="#" data-role="button" id='cancel' data-theme='a'>取消</a>
+                    </div>
+                    <div class="ui-block-b">
+                        <a href="#" data-role="button" id='sub' data-theme='b'>确定</a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="dFloat">
+        <p class="pay_alert">订单详情</p>
+        <a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="closeDetail">No text</a>
+        <ul data-role="listview" id="detailUl">
+            <li><span class="dt">订单编号:</span><span id="dtid"></span></li>
+            <li><span class="dt">商品信息:</span><span id="dinfo"></span></li>
+            <li id="dtotalPrice">商品总价:</li>
+            <li id="dps">备注:</li>
+            <li id="daddress">收货信息:<br></li>
+            <li><button data-role="button" id='cancelDetail' data-theme="b">我知道了</button></li>
+        </ul>
+    </div>
+    <script>
+        $(document).ready(function(){
+            var tid = null;
+            $('.mani-deliver').click(function(){
+                $('#bighead').slideUp();
+                $('#deliverFloat').css('visibility','visible');
+                $('#deliverFloatBottom').css('visibility','visible');
+                tid = $(this).attr('id');
+            });
+            $('#cancel').click(function(){
+                $('#bighead').slideDown();
+                $('#deliverFloat').css('visibility','hidden');
+                $('#deliverFloatBottom').css('visibility','hidden');
+            });
+            $('#closeDeliver').click(function(){
+                $('#bighead').slideDown();
+                $('#deliverFloat').css('visibility','hidden');
+                $('#deliverFloatBottom').css('visibility','hidden');
+            });
+
+            $('#native_overseas').on('change',function(){
+                var that =$(this);
+                var method = $('#native_overseas').val();
+                $('#deliver_company').parent().find('span').text('<-请选择快递公司->');
+                $('#deliver_company').val('no');
+                if(method === "no") {
+                    $('#deliver_company').attr("disabled",true);
+                    $('#deliver_company-button').addClass('ui-state-disabled');
+                    $('#deliver_company').parent().find('span').text('<-请选择快递公司->');
+                    $('#deliver_company').val('no');
+                }else {
+                    $('#deliver_company').load('./fetch_deliver_company.php',that.serialize(),function() {
+                        $('#deliver_company-button').removeClass('ui-state-disabled');
+                        $('#deliver_company').attr('disabled',false);
+                    });
+                }
+            });
+            $("#sub").bind("click",function(event){
+                // 必须选方式
+                var method = $('#native_overseas').val();
+                // 必须选快递公司
+                var dcompany = $('#deliver_company').val();
+                // 必须填单号
+                var deliver_code = $('#dc').val();
+                if(method!='no' && dcompany!='no' && deliver_code) {
+                    $.ajax({
+                        url: "./get_goods_delivering.php",
+                        type: "POST",
+                        dataType: 'jsonp',
+                        jsonp: 'callback',
+                        data: {
+                            "out_stype" : dcompany,
+                            "out_sid"   : deliver_code,
+                            "tid"       :  tid
+                        },
+                        timeout: 10000,
+                        success: function (json) {//客户端jquery预先定义好的callback函数,成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+                            if (json['state'] === true) {
+                                alert("发货成功");
+                                $('#bighead').slideDown();
+                                $('#deliverFloat').css('visibility','hidden');
+                                $('#deliverFloatBottom').css('visibility','hidden');
+                                var countNow = $('.ui-li-has-count').find('span').text();
+                                countNow = parseInt(countNow) - $('.ui-grid-b').has('#'+ tid).size();
+                                $('.ui-li-has-count').find('span').text(countNow);
+                                $('.ui-grid-b').has('#'+ tid).fadeOut("slow");
+                            }else {
+                                alert("发货失败,请重试");
+                            }
+
+                        }
+                    });
+                }else {
+                    alert("未选择发货方式/快递公司/未填写单号");
+                }
+            });
+
+        });
+    </script>
+    <script>
+        // For Detail
+        $(document).ready(function(){
+            var tid = null;
+            $('.mani-detail').click(function(){
+                $('#bighead').slideUp();
+                $('#dFloat').css('visibility','visible');
+                $('#deliverFloatBottom').css('visibility','visible');
+                tid = $(this).attr('id');
+                alert($(this).index());
+                $.ajax({
+                    url: "./getTDetails.php",
+                    type: "POST",
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    data: 'tid='+ tid,
+                    timeout: 5000,
+                    success: function (json) {
+                        if (json['tid'] != null) {
+                            $("#dtid").text("订单编号:"+json['tid']);
+                            $("#dinfo").text("商品信息:"+ json['info']).css('white-space','pre-wrap');
+                        }else {
+                            alert("获取失败请重试");
+                        }
+
+                    }
+                })
+            });
+            $('#cancelDetail').click(function(){
+                $('#bighead').slideDown();
+                $('#dFloat').css('visibility','hidden');
+                $('#deliverFloatBottom').css('visibility','hidden');
+            });
+            $('#closeDetail').click(function(){
+                $('#bighead').slideDown();
+                $('#dFloat').css('visibility','hidden');
+                $('#deliverFloatBottom').css('visibility','hidden');
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

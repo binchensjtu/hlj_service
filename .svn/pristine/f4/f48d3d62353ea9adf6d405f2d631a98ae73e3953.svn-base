@@ -1,0 +1,81 @@
+<?php
+require_once('saeDao.php');
+session_start();
+
+$count = $_POST['number'];
+$pub_id = $_POST['pubID'];
+$phone = $_POST['mobile'];
+$total = $_POST['totalHidden'];
+$is_outer = 1;
+
+// 查找是否有这个用户
+
+
+?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <title></title>
+    <style>
+        #fuck {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 3;
+            height: 800px;
+            overflow: hidden;
+        }
+        #hello {
+            background: #c60a1e;
+            color: white;
+            padding: 20px 5px 20px 10px;
+            font: normal 14px/22px Arial,"Microsoft YaHei";
+            height: 200px;
+            position: relative;
+            top: 20px;
+        }
+        #outer {
+            position: relative;
+
+        }
+        #inner {
+            position: fixed;
+            top: 100px;
+            height: 200px;
+            width: 90%;
+            text-align: center;
+            z-index: 100;
+            left: 5%;
+        }
+        #info {
+            position: absolute;
+            top: 180px;
+            left: 38%;
+            height: 40px;
+            width: 30%;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<div id="outer">
+    <div id="inner">
+        <p id="hello">订单金额合计<?php echo $_POST['totalHidden'] ?>元，购买<?php echo (int)$_POST['totalHidden'] ?>朵小红花，才能完成交易哦！╭(￣▽￣)╯</p>
+        <button id="info" onclick="jumpurl();">我知道了</button>
+    </div>
+    <iframe src="http://wd.koudai.com/item.html?itemID=664015408" frameborder="0" name="fuck" id="fuck" scrolling="no"></iframe>
+</div>
+<script>
+    function jumpurl(){
+        //location='http://wd.koudai.com/item.html?itemID=664015408';
+    }
+</script>
+
+</body>
+
+</html>

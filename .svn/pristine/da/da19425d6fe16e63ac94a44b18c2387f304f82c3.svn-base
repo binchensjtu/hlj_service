@@ -1,0 +1,109 @@
+<?php
+function getWhereString($params) {
+
+    $sql = "";
+    if (is_array($params)) {
+        $sql = " where ";
+        $where = getKeyValString($params, " and ");
+        $sql = $sql.$where;
+    }
+    return $sql;
+}
+
+function getKeyValString($params, $split) {
+    $str = "";
+    if (is_array($params)) {
+        $paramArr = array();
+        foreach($params as $key=>$val) {
+            $valstr = $val;
+            if (is_string($val)) {
+                $valstr = "'".$val."'";
+            }
+            $paramArr[] = $key."=".$valstr;
+        }
+        $str = $str.implode($split, $paramArr);
+    }
+    return $str;
+}
+
+function getParamKeyString($params) {
+    $keys = array_keys($params);
+    return implode(",", $keys);
+}
+function getParamValString($params)
+{
+    $vals = array_values($params);
+    return "'" . implode("','", $vals) . "'";
+}
+function getUpdateString($params) {
+    $sql = "";
+    if (is_array($params)) {
+        $sql = getKeyValString($params, ",");
+    }
+    return $sql;
+}
+
+
+// 插入一条数据
+    function insert($params, $table)
+    {
+        if ($params == null || !is_array($params)) {
+            return -1;
+        }
+        $keys = getParamKeyString($params);
+        $vals = getParamValString($params);
+        $sql = "insert into " . $table . "(" . $keys . ") values(" . $vals . ")";
+        $mysql = new SaeMysql();
+        $mysql->runSql($sql);
+        if ($mysql->errno() != 0) {
+            die("Error:" . $mysql->errmsg());
+        }
+        $mysql->closeDb();
+    }
+
+// 删除数据
+    function delete($where, $table)
+    {
+        $wheres = getWhereString($where);
+        $sql = "delete from " . $table . $wheres;
+        $mysql = new SaeMysql();
+        $mysql->runSql($sql);
+        if ($mysql->errno() != 0) {
+            die("Error:" . $mysql->errmsg());
+        }
+        $mysql->closeDb();
+    }
+// 更新数据
+    function update($params, $where = null,$table) {
+        if ($params == null || !is_array($params)) {
+            return -1;
+        }
+        $upvals = getUpdateString($params);
+        $wheres = getWhereString($where);
+        $sql = "update ".$table." set ".$upvals." ".$wheres;
+        $mysql = new SaeMysql();
+        $mysql->runSql($sql);
+        if ($mysql->errno() != 0) {
+            die("Error:" . $mysql->errmsg());
+        }
+        $mysql->closeDb();
+    }
+
+// 读取数据
+    function get($where = null, $table, $num=null)
+    {
+        $limit = '';
+        if($num) {
+            $limit = " LIMIT 0,".$num;
+        }
+        $sql = "select * from " . $table;
+        $sql = $sql . "" . getWhereString($where)." ".$limit;
+        $sql = trim($sql);
+        $mysql = new SaeMysql();
+        $data = $mysql->getData($sql);
+        $mysql->closeDb();
+        return $data;
+    }
+
+
+?>

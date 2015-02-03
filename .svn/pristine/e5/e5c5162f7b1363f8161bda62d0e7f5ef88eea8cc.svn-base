@@ -1,0 +1,10 @@
+<?php
+
+require_once('saeDao.php');
+$para = array("wechat_id"=>'123',"wechat_num"=>'123',"mobile"=>'13888224564',"email"=>'haha@gmail.com',
+    "is_new"=>'0');
+$out = insert($para,"user_info");
+echo $out;
+
+
+?>

@@ -1,0 +1,86 @@
+<?php
+    session_start();
+    $country = $_REQUEST['country'];
+    $brand=$_REQUEST['brand'];
+    $item=$_REQUEST['item'];
+    $information = $_REQUEST['information'];
+    $_SESSION['uwid'] = $_REQUEST['uwid'];
+
+    $mysql = new SaeMysql();
+
+    // 插入收货信息
+    $sql = "SELECT * FROM `logistic` WHERE `uwid`='o9iAPuM2QweJ-skmY3YFW1zKy6R0'";
+    $data = $mysql->getData( $sql );
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>购买需求</h1>
+        <?php  var_dump($data[0]); ?>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <form method="post" action="reg2.php">
+            <ul data-role="listview">
+
+                <li>
+                    <label for="country" class="select">请选择国家</label>
+                    <select name="country" id="country" data-native-menu="false">
+                            <option value="日本">日本</option>
+                            <option value="美国">美国</option>
+                            <option value="法国">法国</option>
+                            <option value="香港">香港</option>
+                            <option value="澳大利亚">澳大利亚</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="brand">请输入(品牌)</label>
+                    <?php  echo $data[0]; ?>
+                    <input type="text" name="brand" id="brand" value="" placeholder="无印良品" data-clear-btn="true"> 
+                    <label for="item">请输入(商品名称)</label>
+                    <input type="text" name="item" id="item" value="" placeholder="香薰器" data-clear-btn="true"> 
+                    <label for="information">如果有备注信息可以写在下面</label>
+                    <input type="text" name="information" id="information" value="" placeholder="小号（附加佛手柑精油）" data-clear-btn="true"> 
+                </li>
+            </ul>
+            <input type="submit" value="下一步" data-transition="slideup"  data-theme="b">
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+    <script>
+        var countryPre = "<?php echo $country?>";
+        var brandPre = "<?php echo $brand?>";
+        var itemPre = "<?php echo $item?>";
+        var informationPre = "<?php echo $information?>";
+        if(brandPre!='') {
+            $("#brand").val(brandPre);
+        }
+        if(itemPre!='') {
+            $("#item").val(itemPre);
+        }
+        if(informationPre!='') {
+            $("#information").val(informationPre);
+        }
+        if(countryPre!='') {
+            var option = "#country option[value='"+countryPre+"']";
+            $(option).attr("selected", true);
+        }
+    </script>
+</body>
+</html>

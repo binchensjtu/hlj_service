@@ -1,0 +1,71 @@
+<?php
+
+
+require_once('saeDao.php');
+require_once 'blog.php';
+
+// 开始插入数据库
+
+
+// 更新博客（新浪红领巾）
+
+$title = $_POST['q_title'];
+$_SESSION['q_country'] = array($_POST['q_country']);
+$cat = array($_POST['q_cat']);
+$cat_con = "<div><span class='cat_name'>采购地区：</span><span id='cat_area'>美国</span><span class='cat_name'>  品类：</span><span id='cat_name'>化妆品</span></div><br/>";
+
+
+$itemName = $_POST['brand']." ".$_POST['item'];
+$content = $itemName."<br><div><br></div><div><br>产地：".$_POST['country']."</div><div><br></div><div><img title='what' src='".$_SESSION['picURL']."'></div><br><br>".$_POST["information"]."<br><br>".$_SESSION['accessURL'];
+send_to_other("http://hljbloginfo.sinaapp.com/xmlrpc.php",$title,$content,"hlj_service","fanganhuan",$country,$cat);
+session_destroy();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>红领巾轻发布</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>发布成功，敬礼！</h1>
+        <?php var_dump($_POST)?>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="./img/red.jpg" alt="" id="suc_pic" style="max-width: 100%;"/><br>
+        <?php
+        $location = '';
+        switch ($_SESSION['country']) {
+            case "日本":
+                $location = "东京银座";
+                break;
+            case "美国":
+                $location = "第五大道";
+                break;
+            case "法国":
+                $location = "香榭丽舍大街";
+                break;
+            case "香港":
+                $location = "新世界中心";
+                break;
+            case "澳大利亚":
+                $location = "墨尔本中央商业区";
+                break;
+        }
+        ?>
+        <p>请求已经收到，<?php echo $_SESSION['country'] ?>的红领巾们正在赶往<?php echo $location ?>进行采购！</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

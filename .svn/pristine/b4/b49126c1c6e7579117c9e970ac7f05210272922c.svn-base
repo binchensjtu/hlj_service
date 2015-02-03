@@ -1,0 +1,11 @@
+<?php
+
+require_once('saeDao.php');
+$where = array("phone"=>'');
+
+delete($where,"logistic");
+
+var_dump($out);
+
+
+?>

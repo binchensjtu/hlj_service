@@ -1,0 +1,13 @@
+
+
+<?php
+
+$mmc = memcache_init();
+if ($mmc == false) {
+    echo "mc init failed\n";
+}
+
+$times = array("times" => 1, "date"=>time());
+memcache_set($mmc,"huanhuan_deliverTimes",$times);
+
+?>

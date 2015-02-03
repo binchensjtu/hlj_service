@@ -1,0 +1,8 @@
+---
+name: wechatphpsdk
+version: 1
+cron:
+- description: up_pic
+  url: /pic.php
+  schedule: "*/1 * * * *"
+...

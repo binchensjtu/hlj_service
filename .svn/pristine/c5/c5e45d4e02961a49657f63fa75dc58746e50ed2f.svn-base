@@ -1,0 +1,101 @@
+<?php
+
+session_start();
+
+$_SESSION['we_chat']=$_POST['we_chat'];
+$_SESSION['mobile']=$_POST['mobile'];
+$_SESSION['email']=$_POST['email'];
+$_SESSION['alipay']=$_POST['alipay'];
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>收货信息</h1>
+    </div>
+    <?php
+        $email = $_SESSION['email']."";
+        $mail = new SaeMail();
+        $mail->quickSend(
+            $email,
+            "红领巾通知" ,
+            "您在红领巾小助手微信号中订购了".$_SESSION['country']."的".$_SESSION['brand']." ".$_SESSION['item']."。我们会在红领巾们响应后第一时间通知您" ,
+            "caolixiang33@163.com" ,
+            "clx010250966"
+        );
+
+        $url = "http://v.juhe.cn/sms/send?";
+        $tpl_value=urlencode("#item#=".$_SESSION['brand']." ".$_SESSION['item']);
+        $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$_SESSION['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+        file_get_contents ( $url."".$para);
+
+//        $url = "http://v.juhe.cn/sms/send?";
+//        $tpl_value=urlencode("#item#=".$_POST['brand']." ".$_POST['item']);
+//        $para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=18258425758&tpl_id=1100&tpl_value=".$tpl_value;
+//        file_get_contents ( $url."".$para);
+    ?>
+    <div class="ui-body ui-body-a content-it">
+        <div data-role="collapsible" data-collapsed="false">
+            <h1>默认地址</h1>
+            <p>浙江省杭州市余杭区文一路969号五号楼小邮局 邮编：310000</p>
+            <p>韦晓晴</p>
+            <p>18258425758</p>
+            <a href="reg4.php"  data-rel="dialog" data-icon="arrow-r" data-role="button">使用默认地址</a>
+        </div>
+        <ul data-role="listview">
+            <li>
+                <h1>本次交易收货人信息</h1><br>
+                <label for="text-basic">收货人姓名</label>
+                <input type="text" name="text-basic" id="text-basic" value=""> 
+
+
+                <label for="text-basic">收货人地址</label>
+                <input type="text" name="text-basic" id="text-basic" value=""> 
+
+                <label for="text-basic">电话</label>
+                <input type="text" name="text-basic" id="text-basic" value="">
+
+
+                <label for="text-basic">邮编</label>
+                <input type="text" name="text-basic" id="text-basic" value=""> 
+            </li>
+        </ul>
+
+
+
+        <a href="reg4.php" data-rel="dialog" data-transition="slideup" class="ui-btn ui-btn-b">下一步</a>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+<div data-role="page" id="pageTwo">
+    <div data-role="header" data-position="fixed">
+        <a href="#"  data-icon="home" data-role="button" id="closeit">首页</a>
+        <h1>收到了，敬礼！</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="./img/red.jpg" alt=""/><br>
+        <p>请求已经收到，纽约的红领巾们正在赶往第五大道进行采购！</p>
+
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+</body>
+</html>

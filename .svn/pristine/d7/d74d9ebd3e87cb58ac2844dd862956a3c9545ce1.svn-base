@@ -1,0 +1,107 @@
+<?php
+    session_start();
+    // 取得用户ID，如果是新用户则需要输入基本个人信息
+    $_SESSION['uwid'] = $_REQUEST['uwid'];
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾小助手</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/cust.css"/>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery-2.0.3.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.validate.min.js"></script>
+    <script language="JavaScript">
+        $(document).ready(function() {
+
+            //select-with-images
+            $('.select-with-images').on('change', function() {
+                var selection = $(this).val();
+                $(this).parents('.ui-select').find('.ui-btn-text').attr('class', 'ui-btn-text '+selection);
+            });
+            $(document).on('mouseover', function() {
+                $('.select-with-images').each(function() {
+                    var selection = $(this).find(':selected').val();
+                    //console.log('sel: '+selection);
+                    $(this).parents('.ui-select').find('.ui-btn-text').attr('class', 'ui-btn-text '+selection);
+                });
+            });
+            $('#item').on('click',function(){
+                $(this).attr('placeholder','');
+            }).on('blur',function(){
+                $(this).attr('placeholder','例：\n1瓶雅诗兰黛ANR眼部密集精华露(小棕瓶)15ml；1瓶雅诗兰黛鲜亮焕彩精粹爽肤水滋润型200ml（红石榴水）');
+            });
+            $('#information').on('click',function(){
+                $(this).attr('placeholder','');
+            }).on('blur',function(){
+                $(this).attr('placeholder','例：\n请尽量从国外直邮发货，从国内发货也可以。');
+            });
+        });
+    </script>
+    <style>
+        #item, #information {
+            height: 100px !important;
+        }
+    </style>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>购买需求描述</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <form method="post" action="reg2.php" id="itemForm">
+            <ul data-role="listview">
+                <li>
+                    <label for="country" class="select">点击选择代购国家/地区</label>
+                    <select name="country" id="country" data-native-menu="true" class="select-with-images">
+                            <option value="日本" class="jp">日本</option>
+                            <option value="香港" class="hk">香港</option>
+                            <option value="德国" class="de">德国</option>
+                            <option value="美国" class="us">美国</option>
+                            <option value="法国" class="fr">法国</option>
+                            <option value="其他国家">其他</option>
+                    </select>
+                </li>
+                <li>
+                    <div class="clearfix">
+                        <label for="item">请完整描述商品信息</label>
+                        <textarea cols="40" rows="8" name="item" id="item" value="" placeholder="例：
+1瓶雅诗兰黛ANR眼部密集精华露(小棕瓶)15ml；1瓶雅诗兰黛鲜亮焕彩精粹爽肤水滋润型200ml（红石榴水）" data-clear-btn="true"></textarea>
+                    </div>
+                    <div class="clearfix">
+                        <label for="information">备注</label>
+                        <textarea cols="40" rows="8" name="information" id="information" value="" placeholder="例：
+请尽量从国外直邮发货，从国内发货也可以。"></textarea> 
+                    </div>
+                </li>
+            </ul>
+            <input type="submit" value="下一步" data-transition="slideup"  data-theme="b" id="sub">
+            <script>
+                $().ready(function() {
+                    $("#itemForm").validate({
+                        errorPlacement: function(error, element) {
+                            error.appendTo(element.parent());
+                        },
+                        rules: {
+                            item: "required"
+                        },
+                        messages:{
+                            item : "商品信息不能为空"
+                        }
+                    });
+                });
+            </script>
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

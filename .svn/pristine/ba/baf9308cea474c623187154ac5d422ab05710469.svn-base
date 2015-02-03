@@ -1,0 +1,158 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/22
+ * Time: 下午3:26
+ */
+
+require_once __DIR__ . '/libs/KdtApiClient.php';
+require_once('saeDao.php');
+date_default_timezone_set('PRC');
+$appId = '15db6704596966a91b';
+$appSecret = '7e6254589d51c55c4b52f7578806e82c';
+// 调用有赞对象
+$client = new KdtApiClient($appId, $appSecret);
+
+// 定时任务获取2小时内的交易
+$method = 'kdt.trades.sold.get';
+$params = array(
+    "page_size" => 10000,
+    "start_created" => date('Y-m-d H:i:s', time() - 5184000),
+);
+$out = $client->post($method, $params);
+// 交易数组
+$trades = $out['response']['trades'];
+// 遍历获取tid添加至缓存
+for ($i = 0; $i < count($trades); $i++) {
+    // 建立缓存对象
+    $mmc = memcache_init();
+    if ($mmc == false) {
+        echo "mc init failed\n";
+    }
+    $tidRecord = memcache_get($mmc, $trades[$i]['tid']);
+    if ($tidRecord) {
+        // 有缓存记录
+        // 判断是否更新拍下件数
+        $whereBid = array("tid" => $trades[$i]['tid']);
+        $bid = get($whereBid,"auction");
+        if($bid[0]['is_bid'] == 0) {
+            // 更新拍下件数
+            $wherePubBid = array("num_iid" => $trades[$i]["num_iid"]);
+            $out = get($wherePubBid,"pub");
+            if($out) {
+                // 卖家发布商品
+                $auc_count  = $out[0]["auc_count"];
+                $auc_count = (int)$auc_count + $trades[$i]['num'];
+                $paraPubBid = array("auc_count"=>$auc_count);
+                update($paraPubBid,$wherePubBid,"pub");
+            }else {
+                // 买买买商品
+                // 买买买无需处理
+            }
+            // is_bid置为1
+            $paraIsBidUp = array("is_bid" => 1);
+            update($paraIsBidUp,$whereBid,"auction");
+        }
+        // 更新购买件数
+        if($trades[$i]['status'] == 'WAIT_SELLER_SEND_GOODS' || $trades[$i]['status'] == 'WAIT_BUYER_CONFIRM_GOODS') {
+            if($bid[0]['is_buyed'] == 0) {
+                // 更新拍下件数
+                $wherePubBid = array("num_iid" => $trades[$i]["num_iid"]);
+                $out = get($wherePubBid,"pub");
+                if($out) {
+                    // 卖家发布商品
+                    $buy_count  = $out[0]["buy_count"];
+                    $buy_count = (int)$buy_count + $trades[$i]['num'];
+                    $paraPubBid = array("buy_count"=>$buy_count);
+                    update($paraPubBid,$wherePubBid,"pub");
+                }else {
+                    // 买买买无需处理
+                }
+
+                // is_bid置为1
+                $paraIsBuyedUp = array("is_buyed" => 1);
+                update($paraIsBuyedUp,$whereBid,"auction");
+            }
+        }
+        if($tidRecord != $trades[$i]['status']) {
+            // 判断是否需要更新交易表格
+            // if($trades[$i]['status'] == )
+            $paramUp = array("state" => $trades[$i]['status']);
+            $whereUp = array("tid" => $trades[$i]['tid']);
+            update($paramUp,$whereUp,auction);
+            // 更新缓存
+            memcache_set($mmc,$trades[$i]['tid'],$trades[$i]['status']);
+
+        }
+    } else {
+        // 没有缓存记录，需记录
+        memcache_set($mmc,$trades[$i]['tid'],$trades[$i]['status']);
+        // 查找是否有对应的pub商品
+        $where = array("num_iid" => $trades[$i]["num_iid"]);
+        $a = get($where,"pub");
+        if($a) {
+            // 处理买手发布商品
+            $ac_time = date('Y-m-d H:i:s',strtotime($trades[0]['created']));
+            // 插入订单，以便后续跟踪
+            $para = array("uwid"=>$trades[$i]['weixin_user_id'],"phone"=>$trades[$i]['receiver_mobile'],"ac_time"=>$ac_time,
+                "tid"=>$trades[$i]['tid'],"reciever"=>$trades[$i]['receiver_name'],"address"=>($trades[$i]['receiver_state']).' '.
+                    ($trades[$i]['receiver_address']).' 邮编：'. ($trades[$i]['receiver_zip']),"zipcode"=>$trades[$i]['receiver_zip']);
+            $logi = insert($para,"logistic");
+            // 插入订单成功后，插入交易
+            // is_bid=0表示未记录拍下，is_bid=1表示已经记录了拍下
+            // is_buyed=0未记录购买件数，is_bid=1表示已经记录了购买件数
+            if($logi) {
+                $para = array("wechat_id"=>$trades[$i]['weixin_user_id'],"country"=>$a[0]['country'],"item_info"=>$a[0]['title'],
+                    "count"=>$trades[$i]['num'],"state"=>$trades[$i]['status'],"ac_time"=>$ac_time,"logistic_id"=>$logi,"pub_id"=>$a[0]['id'],
+                    "is_outer"=>1,"seller_wechat_id"=>$a[0]['uwid'],"totalPrice"=>$trades[$i]['total_fee'],"post_fee"=>$trades[$i]['post_fee'],
+                    "tid" => $trades[$i]['tid'],"is_bid"=>0,"is_buyed"=>0);
+                insert($para,"auction");
+            }
+        }else {
+            $ed = explode("--",$trades[$i]['title']);
+            $uwid = $ed[1];
+            $uni = $ed[2];
+            $ac_time = date('Y-m-d H:i:s',strtotime($trades[0]['created']));
+            $whereInner = array("wechat_id"=>$uwid,"uni_time"=>$uni);
+            $pre = get($whereInner,"auction");
+            if($pre) {
+                if($pre[0]['is_buyed'] == 1) {
+                    // 创建一个新订单
+                    $para = array("uwid"=>$uwid,"phone"=>$trades[$i]['receiver_mobile'],"ac_time"=>$ac_time,
+                        "tid"=>$trades[$i]['tid'],"reciever"=>$trades[$i]['receiver_name'],"address"=>($trades[$i]['receiver_state']).' '.
+                            ($trades[$i]['receiver_address']).' 邮编：'. ($trades[$i]['receiver_zip']),"zipcode"=>$trades[$i]['receiver_zip']);
+                    $logi = insert($para,"logistic");
+                    // 插入订单成功后，插入交易
+                    if($logi) {
+                        $para = array("wechat_id"=>$uwid,"country"=>$pre[0]['country'],"item_info"=>$pre[0]['title'],
+                            "count"=>$trades[$i]['num'],"state"=>$trades[$i]['status'],"ac_time"=>$ac_time,"logistic_id"=>$logi,
+                            "is_outer"=>0,"totalPrice"=>$trades[$i]['total_fee'],"post_fee"=>$trades[$i]['post_fee'],
+                            "tid" => $trades[$i]['tid'],"is_bid"=>0,"is_buyed"=>0,"brand"=>$pre[0]['brand'],
+                            "item_info"=>$pre[0]['item_info'],"ps"=>$pre[0]['ps']);
+                        insert($para,"auction");
+                    }
+                }else {
+                    $paraInner = array(
+                        "count"=>$trades[$i]['num'],"state"=>$trades[$i]['status'],"ac_time"=>$ac_time,
+                        "totalPrice"=>$trades[$i]['total_fee'],"post_fee"=>$trades[$i]['post_fee'],
+                        "tid" => $trades[$i]['tid'],"is_bid" => 0);
+                    update($paraInner,$whereInner,"auction");
+                    $whereLogi = array("uwid"=>$uwid,"uni_time"=>$uni);
+                    $paraInnerLogi = array("phone"=>$trades[$i]['receiver_mobile'],"ac_time"=>$ac_time,
+                        "tid"=>$trades[$i]['tid'],"reciever"=>$trades[$i]['receiver_name'],"address"=>($trades[$i]['receiver_state']).' '.
+                            ($trades[$i]['receiver_address']).' 邮编：'. ($trades[$i]['receiver_zip']),"zipcode"=>$trades[$i]['receiver_zip']);
+                    update($paraInnerLogi,$whereLogi,"logistic");
+                }
+
+            }
+
+            // 通过微信openId更新订单和物流
+
+        }
+
+    }
+}
+
+
+?>

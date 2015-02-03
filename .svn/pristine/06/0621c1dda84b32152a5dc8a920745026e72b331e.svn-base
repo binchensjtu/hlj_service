@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Fang&Huan</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>我要买</h1>
+        <div data-role="navbar">
+            <ul>
+                <li><a href="#anylink">购买需求</a></li>
+                <li><a href="#anylink" class="ui-btn-active">信息确认</a></li>
+                <li><a href="#anylink">提交成功</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <div data-role="collapsible" data-collapsed="false">
+            <h1>首次使用提示</h1>
+            <p>亲，由于你是第一次联系红领巾，我们需要您保存这些信息。</p>
+        </div>
+        <label for="text-basic">微信号(速递红领巾会联系你)</label>
+        <input type="text" name="text-basic" id="text-basic" value=""> 
+        <label for="text-basic">支付宝账号（担保、退货靠这个）</label>
+        <input type="text" name="text-basic" id="text-basic" value=""> 
+        <label for="text-basic">手机号</label>
+        <input type="text" name="text-basic" id="text-basic" value=""> 
+        <a href="reg3.html" data-transition="slideup" class="ui-btn ui-btn-b">下一步</a>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外小信使</h4>
+    </div>
+</div>
+</body>
+</html>

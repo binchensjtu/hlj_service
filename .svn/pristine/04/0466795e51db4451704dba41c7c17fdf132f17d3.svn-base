@@ -1,0 +1,96 @@
+<?php
+
+session_start();
+require_once('saeDao.php');
+$_SESSION['we_chat']=$_POST['we_chat'];
+$_SESSION['mobile']=$_POST['mobile'];
+$_SESSION['email']=$_POST['email'];
+
+// 开始插入数据
+$mysql = new SaeMysql();
+
+// 插入个人信息
+$datetime = date('Y-m-d H:i:s',time());
+$para = array("wechat_id"=>$_SESSION['uwid'],"wechat_num"=>$_SESSION['we_chat'],"mobile"=>$_SESSION['mobile'],"email"=>$_SESSION['email'],"is_new"=>'0',"date"=>$datetime);
+insert($para,"user_info");
+
+//$sql = "INSERT  INTO `user_info` (`wechat_id`, `wechat_num`, `mobile`, `email`, `alipay`, `logistic_default`, `date`) VALUES ('".$_SESSION['uwid']."','".$_SESSION['we_chat']."','". $_SESSION['mobile']."','".$_SESSION['email']."','". $_SESSION['alipay']."','". $_SESSION['logistic_default']."',NOW() )";
+//$mysql->runSql($sql);
+//if ($mysql->errno() != 0) {
+//    die("Error:" . $mysql->errmsg());
+//}
+// 插入订单
+//$sql = "INSERT  INTO `auction` (`wechat_id`,`country`, `brand`, `item`, `information`, `auc_time`) VALUES ('".$_SESSION['uwid']."','".$_SESSION['country']."','".$_SESSION['brand']."','". $_SESSION['item']."','".$_SESSION['information']."',NOW() )";
+//$mysql->runSql($sql);
+//if ($mysql->errno() != 0) {
+//    die("Error:" . $mysql->errmsg());
+//}
+
+
+$mysql->closeDb();
+$mail = new SaeMail();
+$mail->quickSend(
+    $email."",
+    "红领巾通知" ,
+    "您在红领巾小助手微信号中订购了".$_SESSION['country']."的".$_SESSION['brand']." ".$_SESSION['item']."。我们会在红领巾们响应后第一时间通知您" ,
+    "hlj_service@163.com" ,
+    "fanganhuan13579"
+);
+
+$url = "http://v.juhe.cn/sms/send?";
+$tpl_value=urlencode("#item#=".$_SESSION['brand']." ".$_SESSION['item']);
+$para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$_SESSION['mobile']."&tpl_id=1100&tpl_value=".$tpl_value;
+file_get_contents ( $url."".$para);
+
+session_destroy();
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>红领巾海外代购</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>收到了，敬礼！</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="./img/red.jpg" alt="" id="suc_pic" style="max-width: 100%;"/><br>
+        <?php
+            $location = '';
+            switch ($_SESSION['country']) {
+                case "日本":
+                    $location = "东京银座";
+                    break;
+                case "美国":
+                    $location = "第五大道";
+                    break;
+                case "法国":
+                    $location = "香榭丽舍大街";
+                    break;
+                case "香港":
+                    $location = "新世界中心";
+                    break;
+                case "澳大利亚":
+                    $location = "墨尔本中央商业区";
+                    break;
+            }
+        ?>
+        <p>请求已经收到，<?php echo $_SESSION['country'] ?>的红领巾们正在赶往<?php echo $location ?>进行采购！</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

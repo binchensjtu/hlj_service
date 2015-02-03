@@ -1,0 +1,25 @@
+---
+name: wechatphpsdk
+version: 1
+...
+cron:
+    - description: cron cleaning auction
+          url: clean.php
+          schedule: every 100 mins
+          timezone: Beijing
+    - description: cron syn auction with youzan
+          url: mission_get_tids.php
+          schedule: every 2 mins
+          timezone: Beijing
+    - description: cron syn deliver with youzan
+          url: mission_request_deliver.php
+          schedule: every 5 mins
+          timezone: Beijing
+    - description: cron get_all_items from youzan
+          url: mission_get_all_items.php
+          schedule: every 5 mins
+          timezone: Beijing
+    - description: cron get_all_sellers from youzan
+          url: mission_get_sellers.php
+          schedule: every 30 mins
+          timezone: Beijing

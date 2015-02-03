@@ -1,0 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+echo time();
+
+
+?>

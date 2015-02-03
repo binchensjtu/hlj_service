@@ -1,0 +1,51 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/22
+ * Time: 下午3:26
+ */
+
+require_once __DIR__ . '/libs/KdtApiClient.php';
+require_once('saeDao.php');
+date_default_timezone_set('PRC');
+$appId = '15db6704596966a91b';
+$appSecret = '7e6254589d51c55c4b52f7578806e82c';
+$client = new KdtApiClient($appId, $appSecret);
+
+$method = 'kdt.trades.sold.get';
+
+// 定时任务获取2小时内的交易
+$params = array(
+    "start_created" => date('Y-m-d H:i:s', time() - 86400),
+);
+$out = $client->post($method, $params);
+// 交易数组
+$trades = $out['response']['trades'];
+// 遍历获取tid、num_iid 添加至缓存
+for ($i = 0; $i < count($trades); $i++) {
+    $where = array("num_iid" => $trades[$i]["num_iid"]);
+    $a = get($where,"pub");
+    var_dump($a);
+    if($a) {
+        $datetime = strtotime($a[0]['created']);
+        $datetime = date('Y-m-d H:i:s', $datetime);
+        // 插入订单，以便后续跟踪
+        $para = array("uwid"=>$trades[$i]['weixin_user_id'],"phone"=>$trades[$i]['receiver_mobile'],"ac_time"=>$datetime,
+            "tid"=>$trades[$i]['tid'],"reciever"=>$trades[$i]['receiver_name'],"address"=>($trades[$i]['receiver_state']).' '.
+                ($trades[$i]['receiver_address']).' 邮编：'. ($trades[$i]['receiver_zip']));
+        $logi = insert($para,"logistic");
+
+        if($logi) {
+            $para = array("wechat_id"=>$trades[$i]['weixin_user_id'],"country"=>$a[0]['country'],"item_info"=>$a[0]['title'],
+                "count"=>$trades[$i]['num'],"state"=>$trades[$i]['status'],"auc_time"=>$datetime,"logistic_id"=>$logi,"pub_id"=>$a[0]['id'],
+                "is_outer"=>1,"seller_wechat_id"=>$a[0]['uwid'],"totalPrice"=>$trades[$i]['total_fee'],"post_fee"=>$trades[$i]['post_fee']);
+            insert($para,"auction");
+        }
+    }
+
+
+}
+
+
+?>

@@ -1,0 +1,153 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/4
+ * Time: 下午6:57
+ */
+// 取得所有上架商品
+require_once('saeDao.php');
+$uwid = $_REQUEST['uwid'];
+$where = array("uwid" => $uwid,"shon_off" => 1);
+$out = get($where,"pub");
+
+$where2 = array("seller_wechat_id"=>$uwid,"state"=>"WAIT_SELLER_SEND_GOODS");
+$out2 = get($where2,"auction");
+$waitCount = count($out2);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾商品管理</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <style>
+        .ui-li-count {
+            background-color: red;
+            border: none;
+            border-radius: 0.5em;
+            width: 14px;
+            height: 14px;
+            font-size: 0.2em !important;
+            right: 2px;
+            top: 15px;
+            z-index: 1000;
+        }
+
+        #mani {
+            z-index: 10 !important;
+        }
+
+        #status {
+            z-index: 1000 !important;
+        }
+
+        .ui-block-title {
+            font-size: 0.8em;
+            right: 0;
+            width: 50% !important;
+            padding: 5px;
+            padding-left: 9px;
+        }
+
+        .mani-button {
+            height: 30px;
+            font-size: 0.8em;
+            top: 5px;
+        }
+
+        .ui-block-img {
+            max-width: 25%;
+        }
+
+        .ui-block-mani {
+            max-width: 25%;
+        }
+        .ui-grid-b {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+            border-bottom: 1px solid #a5a5a5;
+        }
+    </style>
+</head>
+<body>
+<div data-role="page" id="manager_off">
+    <div data-role="header" data-position="fixed">
+        <div data-role="navbar">
+            <ul data-role="listview" data-count-theme="b" id="status">
+                <li></li>
+                <li></li>
+                <li><span class="ui-li-count"><?php echo $waitCount ?></span></li>
+                <li></li>
+            </ul>
+            <ul id="mani">
+                <li><a href="#" class="ui-btn-active">在售</a></li>
+                <li><a href="./seller_manager_on.php?uwid=<?php echo $uwid ?>" data-ajax='false'>已删除</a></li>
+                <li><a href="./seller_manager_deliver.php?uwid=<?php echo $uwid ?>" data-ajax='false'>待发货</a></li>
+                <li><a href="#">已发货</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /header -->
+    <div class="ui-content" role="main">
+        <div id="item-wrapper">
+            <?php
+            $mmc = memcache_init();
+            if ($mmc == false) {
+                echo "mc init failed\n";
+            }
+            for($i= count($out); $i >= 0; $i--) {
+                if($out[$i]['num_iid'] != '') {
+                    $item_pack = memcache_get($mmc, $out[$i]['num_iid']."_info");
+                    ?>
+                    <div class="ui-grid-b">
+                        <div class="ui-block-a ui-block-img">
+                            <a href='<?php echo $out[$i]['buyAddress'] ?>'>
+                                <img
+                                src='<?php echo $item_pack['pic_thumb_url'] ?>'
+                                style="width:80px;max-height: 80px;">
+                            </a>
+                        </div>
+                        <div class="ui-block-b ui-block-title"><p><?php echo $out[$i]['title'] ?></p></div>
+                        <div class="ui-block-c ui-block-mani">
+                            <button class='mani-button' id='<?php echo $out[$i]['num_iid'] ?>'>删除</button>
+                        </div>
+                    </div>
+                <?php
+                }
+            }
+            ?>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function () {
+            $('#item-wrapper').on('click', 'button',function (event) {
+                var id = $(this).attr('id');
+                var that = $(this);
+                $.ajax({
+                    url: "./get_goods_off.php",
+                    type: "POST",
+                    dataType: 'jsonp',
+                    jsonp: 'callback',
+                    data: 'id='+ id,
+                    timeout: 5000,
+                    success: function (json) {//客户端jquery预先定义好的callback函数,成功获取跨域服务器上的json数据后,会动态执行这个callback函数
+
+                        if (json['state'] === false) {
+                            alert("删除成功");
+                            that.parent().parent().fadeOut("slow");
+                        }
+
+                    }
+                })
+            });
+        })
+    </script>
+</div>
+</body>
+</html>

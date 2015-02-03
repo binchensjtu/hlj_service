@@ -1,0 +1,52 @@
+<?php
+
+
+require_once('saeDao.php');
+session_start();
+
+$wechat_id = $_SESSION['uwid'];
+$realName = $_POST['realName'];
+$wechat_num = $_POST['wechat_num'];
+$email = $_POST['email'];
+$mobile = $_POST['mobile'];
+$country= $_POST['country'];
+$code = $_SESSION['code'];
+
+$datetime = date('Y-m-d H:i:s',time());
+$para = array("valid"=>'0',"seller"=>$wechat_id,"use_date"=>$datetime);
+$where = array("code"=>$code);
+update($para,$where,"yaoqingma");
+$para_after = array("wechat_id"=>$wechat_id,"level"=>'3',
+    "realName"=>$realName,"wechat_num"=>$wechat_num,"email"=>$email,
+    "mobile"=>$mobile,"country"=>$country,"date"=>$datetime);
+insert($para_after,'seller');
+
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>红领巾海外代购</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/cust.css"/>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery-2.0.3.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.validate.min.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>恭喜你成为红领巾</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="http://testhlj.qiniudn.com/red.jpg" alt="" id="suc_pic" style="max-width: 100%;"/><br>
+        <p>你可以在“红领巾”小助手公众号中输入“我要发布”发布你的商品了O(∩_∩)O~</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

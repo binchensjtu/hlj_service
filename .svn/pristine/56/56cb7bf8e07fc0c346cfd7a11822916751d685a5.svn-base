@@ -1,0 +1,19 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/9
+ * Time: 下午7:25
+ */
+
+?>
+<p class="pay_alert">订单详情</p>
+<a href="#" class="ui-btn ui-icon-delete ui-btn-icon-notext ui-corner-all" id="closeDetail">No text</a>
+<ul data-role="listview" id="deliverUl">
+    <li>订单编号:123</li>
+    <li>商品信息:<br>商品信息</li>
+    <li>商品总价:备注</li>
+    <li>备注:备注</li>
+    <li>收货信息:<br>备注</li>
+    <li><button data-role="button" id='cancelDetail' data-theme="b">我知道了</button></li>
+</ul>

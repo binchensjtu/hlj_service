@@ -1,0 +1,44 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/17
+ * Time: 下午4:22
+ *
+ *
+ *
+ *
+ */
+function utf_substr($str,$len)
+{
+    for($i=0;$i<$len;$i++)
+    {
+        $temp_str=substr($str,0,1);
+        if(ord($temp_str) > 127)
+        {
+            $i++;
+            if($i<$len)
+            {
+                $new_str[]=substr($str,0,3);
+                $str=substr($str,3);
+            }
+        }
+        else
+        {
+            $new_str[]=substr($str,0,1);
+            $str=substr($str,1);
+        }
+    }
+    return join($new_str,'');
+}
+
+
+
+$a = "花擦abc擦擦擦擦擦擦擦擦擦厂生产的";
+if(mb_strlen($a)>23) {
+ $a = utf_substr($a,9).'...';
+}
+echo $a;
+
+
+?>

@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="9d6de257-df0c-4d19-b344-9bc0de82ff19" name="Default" comment="" />
+    <ignored path="mytaotao123.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <ignored path=".idea/dataSources.local.xml" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="mytaotao123" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="mission_get_tids.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1/mission_get_tids.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="408" max-vertical-offset="3145">
+              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="get_seller_info.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1/admin/get_seller_info.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-4.6923075" vertical-offset="507" max-vertical-offset="1173">
+              <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="sellerSucess.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/1/sellerSucess.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.538462" vertical-offset="1070" max-vertical-offset="3468">
+              <caret line="76" column="20" selection-start-line="75" selection-start-column="12" selection-end-line="76" selection-end-column="20" />
+              <folding>
+                <marker date="1421493034000" expanded="true" signature="3036:3047" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reg4.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/1/reg4.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4385321" vertical-offset="1087" max-vertical-offset="3417">
+              <caret line="78" column="306" selection-start-line="78" selection-start-column="306" selection-end-line="78" selection-end-column="306" />
+              <folding>
+                <marker date="1421982262000" expanded="true" signature="2402:2413" placeholder="..." />
+                <marker date="1421982262000" expanded="true" signature="3765:4244" placeholder="..." />
+                <marker date="1421982262000" expanded="true" signature="3772:3827" placeholder="..." />
+                <marker date="1421982262000" expanded="true" signature="3834:4236" placeholder="..." />
+                <marker date="1421982262000" expanded="true" signature="3943:4011" placeholder="..." />
+                <marker date="1421982262000" expanded="true" signature="4024:4156" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="true" />
+    </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/1/sellRegSuc.php" />
+        <option value="$PROJECT_DIR$/1/sellerReg.php" />
+        <option value="$PROJECT_DIR$/1/blog.php" />
+        <option value="$PROJECT_DIR$/1/clean.php" />
+        <option value="$PROJECT_DIR$/1/public.php" />
+        <option value="$PROJECT_DIR$/1/pub.html" />
+        <option value="$PROJECT_DIR$/1/css/cust_p.css" />
+        <option value="$PROJECT_DIR$/1/good.html" />
+        <option value="$PROJECT_DIR$/1/test3.html" />
+        <option value="$PROJECT_DIR$/1/mail.php" />
+        <option value="$PROJECT_DIR$/1/test2.php" />
+        <option value="$PROJECT_DIR$/1/updatesh.php" />
+        <option value="$PROJECT_DIR$/1/get_goods_unshift.php" />
+        <option value="$PROJECT_DIR$/1/test3.php" />
+        <option value="$PROJECT_DIR$/1/test4.php" />
+        <option value="$PROJECT_DIR$/1/utils/simple_html_dom.php" />
+        <option value="$PROJECT_DIR$/1/delivertest.php" />
+        <option value="$PROJECT_DIR$/1/testhtml.php" />
+        <option value="$PROJECT_DIR$/1/getDC.php" />
+        <option value="$PROJECT_DIR$/1/getTDetails.php" />
+        <option value="$PROJECT_DIR$/1/config.yaml" />
+        <option value="$PROJECT_DIR$/1/fetch_deliver_company.php" />
+        <option value="$PROJECT_DIR$/1/css/country.css" />
+        <option value="$PROJECT_DIR$/1/css/cust.css" />
+        <option value="$PROJECT_DIR$/1/reg.php" />
+        <option value="$PROJECT_DIR$/1/reg2.php" />
+        <option value="$PROJECT_DIR$/1/reg3.php" />
+        <option value="$PROJECT_DIR$/1/css/another.css" />
+        <option value="$PROJECT_DIR$/1/admin/admin_requested.php" />
+        <option value="$PROJECT_DIR$/1/admin/admin_payed.php" />
+        <option value="$PROJECT_DIR$/1/admin/admin_create_pay.php" />
+        <option value="$PROJECT_DIR$/1/sellerUpload.php" />
+        <option value="$PROJECT_DIR$/1/imgutil.php" />
+        <option value="$PROJECT_DIR$/1/seller_manager_on.php" />
+        <option value="$PROJECT_DIR$/1/seller_manager_off.php" />
+        <option value="$PROJECT_DIR$/1/seller_manager_deliver.php" />
+        <option value="$PROJECT_DIR$/1/seller_manager_delivered.php" />
+        <option value="$PROJECT_DIR$/1/buyer/buyer_reg.php" />
+        <option value="$PROJECT_DIR$/1/sellerSucess.php" />
+        <option value="$PROJECT_DIR$/1/mission_request_deliver.php" />
+        <option value="$PROJECT_DIR$/1/admin/update_alarm.php" />
+        <option value="$PROJECT_DIR$/1/buyer/buyer_wait_pay.php" />
+        <option value="$PROJECT_DIR$/1/buyer/buyer_wait_request.php" />
+        <option value="$PROJECT_DIR$/1/buyer/buyer_get_deliver.php" />
+        <option value="$PROJECT_DIR$/1/buyer/buyer_wait_deliver.php" />
+        <option value="$PROJECT_DIR$/1/admin/admin_wait_request.php" />
+        <option value="$PROJECT_DIR$/1/get_goods_delivering.php" />
+        <option value="$PROJECT_DIR$/1/weixin.php" />
+        <option value="$PROJECT_DIR$/1/admin/fetch_sellers.php" />
+        <option value="$PROJECT_DIR$/1/mission_get_tids.php" />
+        <option value="$PROJECT_DIR$/1/reg4.php" />
+      </list>
+    </option>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="PHP 5.5">
+    <include_path>
+      <path value="/usr/bin" />
+    </include_path>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="y" value="23" />
+    <option name="width" value="1366" />
+    <option name="height" value="691" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="2" id="Remove" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mytaotao123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mytaotao123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mytaotao123" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$USER_HOME$/putiandudu" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="LayoutCode.rearrangeEntriesHTML" value="false" />
+    <property name="LayoutCode.rearrangeEntriesPHP" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="LayoutCode.rearrangeEntriesCSS" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/1" />
+      <recent name="$PROJECT_DIR$/1/utils" />
+      <recent name="$PROJECT_DIR$/1/img" />
+      <recent name="$PROJECT_DIR$/1/css" />
+      <recent name="$PROJECT_DIR$/1/libs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/1/img" />
+      <recent name="$PROJECT_DIR$/1/js" />
+      <recent name="$PROJECT_DIR$/1/css" />
+    </key>
+  </component>
+  <component name="RunManager" selected="PHP Script.get_goods_delivering.php">
+    <configuration default="false" name="mission_get_tids.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/1/mission_get_tids.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="get_goods_unshift.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/1/get_goods_unshift.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="test4.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/1/test4.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="delivertest.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/1/delivertest.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="get_goods_delivering.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/1/get_goods_delivering.php">
+      <RunnerSettings RunnerId="PhpRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpBehatConfigurationType" factoryName="Behat">
+      <BehatRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server" server_id="0bafb388-e31d-47c8-9772-3c4817f3152d" server_name="hello">
+      <method />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="test3.php" type="JavascriptDebugType" factoryName="JavaScript Debug" nameIsGenerated="true" uri="http://localhost/daigou/1/test3.php">
+      <RunnerSettings RunnerId="JavascriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
+      <method />
+    </configuration>
+    <configuration default="false" name="reg.php" type="JavascriptDebugType" factoryName="JavaScript Debug" nameIsGenerated="true" uri="http://localhost/daigou/1/reg.php">
+      <RunnerSettings RunnerId="JavascriptDebugRunner" />
+      <ConfigurationWrapper RunnerId="JavascriptDebugRunner" />
+      <method />
+    </configuration>
+    <list size="7">
+      <item index="0" class="java.lang.String" itemvalue="JavaScript Debug.test3.php" />
+      <item index="1" class="java.lang.String" itemvalue="JavaScript Debug.reg.php" />
+      <item index="2" class="java.lang.String" itemvalue="PHP Script.mission_get_tids.php" />
+      <item index="3" class="java.lang.String" itemvalue="PHP Script.get_goods_unshift.php" />
+      <item index="4" class="java.lang.String" itemvalue="PHP Script.test4.php" />
+      <item index="5" class="java.lang.String" itemvalue="PHP Script.delivertest.php" />
+      <item index="6" class="java.lang.String" itemvalue="PHP Script.get_goods_delivering.php" />
+    </list>
+    <recent_temporary>
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="PHP Script.get_goods_delivering.php" />
+        <item index="1" class="java.lang.String" itemvalue="PHP Script.delivertest.php" />
+        <item index="2" class="java.lang.String" itemvalue="PHP Script.test4.php" />
+        <item index="3" class="java.lang.String" itemvalue="PHP Script.get_goods_unshift.php" />
+        <item index="4" class="java.lang.String" itemvalue="PHP Script.mission_get_tids.php" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="StructuralSearchPlugin">
+    <replaceConfiguration name="user defined" text="“" recursive="false" caseInsensitive="true" type="PHP" reformatAccordingToStyle="true" shortenFQN="true" useStaticImport="true" replacement="'" history="1" />
+  </component>
+  <component name="SvnConfiguration" myUseAcceleration="nothing" cleanupOnStartRun="true">
+    <configuration>$USER_HOME$/.subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d6de257-df0c-4d19-b344-9bc0de82ff19" name="Default" comment="" />
+      <created>1416372575792</created>
+      <option name="number" value="Default" />
+      <updated>1416372575792</updated>
+    </task>
+    <task id="LOCAL-01293">
+      <created>1421389754104</created>
+      <option name="number" value="01293" />
+      <option name="project" value="LOCAL" />
+      <updated>1421389754104</updated>
+    </task>
+    <task id="LOCAL-01294">
+      <created>1421390383105</created>
+      <option name="number" value="01294" />
+      <option name="project" value="LOCAL" />
+      <updated>1421390383106</updated>
+    </task>
+    <task id="LOCAL-01295">
+      <created>1421390893105</created>
+      <option name="number" value="01295" />
+      <option name="project" value="LOCAL" />
+      <updated>1421390893106</updated>
+    </task>
+    <task id="LOCAL-01296">
+      <created>1421392611124</created>
+      <option name="number" value="01296" />
+      <option name="project" value="LOCAL" />
+      <updated>1421392611125</updated>
+    </task>
+    <task id="LOCAL-01297">
+      <created>1421402393106</created>
+      <option name="number" value="01297" />
+      <option name="project" value="LOCAL" />
+      <updated>1421402393107</updated>
+    </task>
+    <task id="LOCAL-01298">
+      <created>1421402763122</created>
+      <option name="number" value="01298" />
+      <option name="project" value="LOCAL" />
+      <updated>1421402763124</updated>
+    </task>
+    <task id="LOCAL-01299">
+      <created>1421402841106</created>
+      <option name="number" value="01299" />
+      <option name="project" value="LOCAL" />
+      <updated>1421402841106</updated>
+    </task>
+    <task id="LOCAL-01300">
+      <created>1421403337106</created>
+      <option name="number" value="01300" />
+      <option name="project" value="LOCAL" />
+      <updated>1421403337106</updated>
+    </task>
+    <task id="LOCAL-01301">
+      <created>1421403404105</created>
+      <option name="number" value="01301" />
+      <option name="project" value="LOCAL" />
+      <updated>1421403404105</updated>
+    </task>
+    <task id="LOCAL-01302">
+      <created>1421403797105</created>
+      <option name="number" value="01302" />
+      <option name="project" value="LOCAL" />
+      <updated>1421403797105</updated>
+    </task>
+    <task id="LOCAL-01303">
+      <created>1421404729105</created>
+      <option name="number" value="01303" />
+      <option name="project" value="LOCAL" />
+      <updated>1421404729105</updated>
+    </task>
+    <task id="LOCAL-01304">
+      <created>1421404831108</created>
+      <option name="number" value="01304" />
+      <option name="project" value="LOCAL" />
+      <updated>1421404831108</updated>
+    </task>
+    <task id="LOCAL-01305">
+      <created>1421404938106</created>
+      <option name="number" value="01305" />
+      <option name="project" value="LOCAL" />
+      <updated>1421404938106</updated>
+    </task>
+    <task id="LOCAL-01306">
+      <created>1421405166104</created>
+      <option name="number" value="01306" />
+      <option name="project" value="LOCAL" />
+      <updated>1421405166105</updated>
+    </task>
+    <task id="LOCAL-01307">
+      <created>1421405896105</created>
+      <option name="number" value="01307" />
+      <option name="project" value="LOCAL" />
+      <updated>1421405896105</updated>
+    </task>
+    <task id="LOCAL-01308">
+      <created>1421406066104</created>
+      <option name="number" value="01308" />
+      <option name="project" value="LOCAL" />
+      <updated>1421406066104</updated>
+    </task>
+    <task id="LOCAL-01309">
+      <created>1421406443105</created>
+      <option name="number" value="01309" />
+      <option name="project" value="LOCAL" />
+      <updated>1421406443106</updated>
+    </task>
+    <task id="LOCAL-01310">
+      <created>1421406970107</created>
+      <option name="number" value="01310" />
+      <option name="project" value="LOCAL" />
+      <updated>1421406970107</updated>
+    </task>
+    <task id="LOCAL-01311">
+      <created>1421407530105</created>
+      <option name="number" value="01311" />
+      <option name="project" value="LOCAL" />
+      <updated>1421407530105</updated>
+    </task>
+    <task id="LOCAL-01312">
+      <created>1421409061114</created>
+      <option name="number" value="01312" />
+      <option name="project" value="LOCAL" />
+      <updated>1421409061114</updated>
+    </task>
+    <task id="LOCAL-01313">
+      <created>1421409339105</created>
+      <option name="number" value="01313" />
+      <option name="project" value="LOCAL" />
+      <updated>1421409339105</updated>
+    </task>
+    <task id="LOCAL-01314">
+      <created>1421409528105</created>
+      <option name="number" value="01314" />
+      <option name="project" value="LOCAL" />
+      <updated>1421409528105</updated>
+    </task>
+    <task id="LOCAL-01315">
+      <created>1421490683122</created>
+      <option name="number" value="01315" />
+      <option name="project" value="LOCAL" />
+      <updated>1421490683124</updated>
+    </task>
+    <task id="LOCAL-01316">
+      <created>1421490952105</created>
+      <option name="number" value="01316" />
+      <option name="project" value="LOCAL" />
+      <updated>1421490952105</updated>
+    </task>
+    <task id="LOCAL-01317">
+      <created>1421491040105</created>
+      <option name="number" value="01317" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491040105</updated>
+    </task>
+    <task id="LOCAL-01318">
+      <created>1421491156105</created>
+      <option name="number" value="01318" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491156105</updated>
+    </task>
+    <task id="LOCAL-01319">
+      <created>1421491463105</created>
+      <option name="number" value="01319" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491463105</updated>
+    </task>
+    <task id="LOCAL-01320">
+      <created>1421491491106</created>
+      <option name="number" value="01320" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491491106</updated>
+    </task>
+    <task id="LOCAL-01321">
+      <created>1421491522104</created>
+      <option name="number" value="01321" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491522104</updated>
+    </task>
+    <task id="LOCAL-01322">
+      <created>1421491557105</created>
+      <option name="number" value="01322" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491557105</updated>
+    </task>
+    <task id="LOCAL-01323">
+      <created>1421491636105</created>
+      <option name="number" value="01323" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491636105</updated>
+    </task>
+    <task id="LOCAL-01324">
+      <created>1421491666105</created>
+      <option name="number" value="01324" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491666105</updated>
+    </task>
+    <task id="LOCAL-01325">
+      <created>1421491859105</created>
+      <option name="number" value="01325" />
+      <option name="project" value="LOCAL" />
+      <updated>1421491859105</updated>
+    </task>
+    <task id="LOCAL-01326">
+      <created>1421492086103</created>
+      <option name="number" value="01326" />
+      <option name="project" value="LOCAL" />
+      <updated>1421492086104</updated>
+    </task>
+    <task id="LOCAL-01327">
+      <created>1421492749105</created>
+      <option name="number" value="01327" />
+      <option name="project" value="LOCAL" />
+      <updated>1421492749105</updated>
+    </task>
+    <task id="LOCAL-01328">
+      <created>1421493126104</created>
+      <option name="number" value="01328" />
+      <option name="project" value="LOCAL" />
+      <updated>1421493126104</updated>
+    </task>
+    <task id="LOCAL-01329">
+      <created>1421493817105</created>
+      <option name="number" value="01329" />
+      <option name="project" value="LOCAL" />
+      <updated>1421493817105</updated>
+    </task>
+    <task id="LOCAL-01330">
+      <created>1421495001105</created>
+      <option name="number" value="01330" />
+      <option name="project" value="LOCAL" />
+      <updated>1421495001105</updated>
+    </task>
+    <task id="LOCAL-01331">
+      <created>1421496130104</created>
+      <option name="number" value="01331" />
+      <option name="project" value="LOCAL" />
+      <updated>1421496130104</updated>
+    </task>
+    <task id="LOCAL-01332">
+      <created>1421496321105</created>
+      <option name="number" value="01332" />
+      <option name="project" value="LOCAL" />
+      <updated>1421496321105</updated>
+    </task>
+    <task id="LOCAL-01333">
+      <created>1421496734104</created>
+      <option name="number" value="01333" />
+      <option name="project" value="LOCAL" />
+      <updated>1421496734104</updated>
+    </task>
+    <task id="LOCAL-01334">
+      <created>1421497289106</created>
+      <option name="number" value="01334" />
+      <option name="project" value="LOCAL" />
+      <updated>1421497289106</updated>
+    </task>
+    <task id="LOCAL-01335">
+      <created>1421497310104</created>
+      <option name="number" value="01335" />
+      <option name="project" value="LOCAL" />
+      <updated>1421497310105</updated>
+    </task>
+    <task id="LOCAL-01336">
+      <created>1421503410104</created>
+      <option name="number" value="01336" />
+      <option name="project" value="LOCAL" />
+      <updated>1421503410105</updated>
+    </task>
+    <task id="LOCAL-01337">
+      <created>1421503936105</created>
+      <option name="number" value="01337" />
+      <option name="project" value="LOCAL" />
+      <updated>1421503936105</updated>
+    </task>
+    <task id="LOCAL-01338">
+      <created>1421504011105</created>
+      <option name="number" value="01338" />
+      <option name="project" value="LOCAL" />
+      <updated>1421504011106</updated>
+    </task>
+    <task id="LOCAL-01339">
+      <created>1421508687105</created>
+      <option name="number" value="01339" />
+      <option name="project" value="LOCAL" />
+      <updated>1421508687105</updated>
+    </task>
+    <task id="LOCAL-01340">
+      <created>1421921755122</created>
+      <option name="number" value="01340" />
+      <option name="project" value="LOCAL" />
+      <updated>1421921755124</updated>
+    </task>
+    <task id="LOCAL-01341">
+      <created>1421982284131</created>
+      <option name="number" value="01341" />
+      <option name="project" value="LOCAL" />
+      <updated>1421982284133</updated>
+    </task>
+    <option name="localTasksCounter" value="1342" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="23" width="1366" height="691" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25375625" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1925982" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.360601" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32849365" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32554257" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35673353" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32849365" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295129" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849365" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32849365" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25709516" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23791541" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38230383" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+    <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="3" />
+    </breakpoint-manager>
+    <watches-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/1/js-chat-sdk-samples/lib/flash/swfobject.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.029668411" vertical-offset="0" max-vertical-offset="573">
+          <caret line="3" column="110" selection-start-line="3" selection-start-column="110" selection-end-line="3" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/clean.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3119266" vertical-offset="0" max-vertical-offset="545">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/mission_get_all_tids.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="573">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/get_goods_on.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5302752" vertical-offset="0" max-vertical-offset="545">
+          <caret line="22" column="44" selection-start-line="0" selection-start-column="0" selection-end-line="28" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/getTDetails.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="544">
+          <caret line="20" column="21" selection-start-line="20" selection-start-column="21" selection-end-line="20" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/config.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <caret line="21" column="31" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/delivertest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693" vertical-offset="170" max-vertical-offset="1581">
+          <caret line="25" column="13" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/hello.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="34.615383" vertical-offset="1614" max-vertical-offset="2159">
+          <caret line="42" column="0" selection-start-line="42" selection-start-column="0" selection-end-line="50" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/mail.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537" vertical-offset="0" max-vertical-offset="1054">
+          <caret line="12" column="39" selection-start-line="12" selection-start-column="39" selection-end-line="12" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/mission_get_all_items.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.230769" vertical-offset="67" max-vertical-offset="986">
+          <caret line="15" column="22" selection-start-line="15" selection-start-column="22" selection-end-line="15" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/saeDao.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1751" max-vertical-offset="1972">
+          <caret line="103" column="32" selection-start-line="103" selection-start-column="32" selection-end-line="103" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/sellerReg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="2091">
+          <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/sellRegSuc.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="475" max-vertical-offset="1020">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/test.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="357" max-vertical-offset="459">
+          <caret line="21" column="2" selection-start-line="21" selection-start-column="2" selection-end-line="21" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/test2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="306">
+          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/test4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="187">
+          <caret line="9" column="31" selection-start-line="9" selection-start-column="31" selection-end-line="9" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/updatesh.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="187">
+          <caret line="10" column="12" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/fetch_deliver_company.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.75868374" vertical-offset="95" max-vertical-offset="663">
+          <caret line="30" column="5" selection-start-line="30" selection-start-column="5" selection-end-line="30" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/getDC.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46617916" vertical-offset="0" max-vertical-offset="547">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/get_seller_ocupied.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="573">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/reg3.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6238532" vertical-offset="68" max-vertical-offset="1292">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/reg2.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65504587" vertical-offset="119" max-vertical-offset="1921">
+          <caret line="28" column="6" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/admin_make_pay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="571">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/admin_create_pay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5614679" vertical-offset="442" max-vertical-offset="4080">
+          <caret line="49" column="11" selection-start-line="49" selection-start-column="11" selection-end-line="49" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/admin_payed.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21834862" vertical-offset="578" max-vertical-offset="3995">
+          <caret line="46" column="82" selection-start-line="46" selection-start-column="82" selection-end-line="46" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/admin_requested.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66023165" vertical-offset="355" max-vertical-offset="3077">
+          <caret line="46" column="82" selection-start-line="46" selection-start-column="82" selection-end-line="46" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/css/another.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32749563" vertical-offset="0" max-vertical-offset="1836">
+          <caret line="11" column="16" selection-start-line="0" selection-start-column="0" selection-end-line="102" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/css/cust.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4045534" vertical-offset="432" max-vertical-offset="1020">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="41" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/imgutil.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.03119266" vertical-offset="153" max-vertical-offset="782">
+          <caret line="10" column="43" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/sellerUpload.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37431192" vertical-offset="0" max-vertical-offset="3876">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="13" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/seller_manager_delivered.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.266055" vertical-offset="92" max-vertical-offset="4471">
+          <caret line="51" column="86" selection-start-line="51" selection-start-column="86" selection-end-line="51" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/seller_manager_off.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.37431192" vertical-offset="153" max-vertical-offset="2618">
+          <caret line="26" column="86" selection-start-line="23" selection-start-column="4" selection-end-line="26" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5614679" vertical-offset="34" max-vertical-offset="1751">
+          <caret line="20" column="50" selection-start-line="20" selection-start-column="50" selection-end-line="20" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_reg_success.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.12477064" vertical-offset="68" max-vertical-offset="731">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/reg.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="238" max-vertical-offset="1904">
+          <caret line="14" column="74" selection-start-line="14" selection-start-column="17" selection-end-line="14" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/seller_manager_on.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="47.73077" vertical-offset="1564" max-vertical-offset="2652">
+          <caret line="24" column="82" selection-start-line="24" selection-start-column="82" selection-end-line="24" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_get_deliver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-11.769231" vertical-offset="85" max-vertical-offset="4726">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_wait_deliver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.076923" vertical-offset="68" max-vertical-offset="4250">
+          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_wait_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="44.46154" vertical-offset="1598" max-vertical-offset="2941">
+          <caret line="26" column="27" selection-start-line="26" selection-start-column="27" selection-end-line="26" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/buyer/buyer_wait_pay.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="66.69231" vertical-offset="1989" max-vertical-offset="2941">
+          <caret line="15" column="23" selection-start-line="7" selection-start-column="0" selection-end-line="15" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/admin_wait_request.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-13.884615" vertical-offset="4671" max-vertical-offset="6103">
+          <caret line="301" column="93" selection-start-line="301" selection-start-column="93" selection-end-line="301" selection-end-column="93" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/update_alarm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3798165" vertical-offset="456" max-vertical-offset="1020">
+          <caret line="44" column="76" selection-start-line="44" selection-start-column="76" selection-end-line="44" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/seller_manager_deliver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="139.88461" vertical-offset="4385" max-vertical-offset="6018">
+          <caret line="49" column="86" selection-start-line="46" selection-start-column="4" selection-end-line="49" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/get_goods_delivering.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.22018349" vertical-offset="951" max-vertical-offset="1904">
+          <caret line="63" column="56" selection-start-line="63" selection-start-column="56" selection-end-line="63" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/mission_request_deliver.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2770643" vertical-offset="2737" max-vertical-offset="5474">
+          <caret line="93" column="71" selection-start-line="93" selection-start-column="71" selection-end-line="93" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/fetch_sellers.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09357798" vertical-offset="221" max-vertical-offset="833">
+          <caret line="21" column="41" selection-start-line="21" selection-start-column="41" selection-end-line="21" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/weixin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.31559634" vertical-offset="848" max-vertical-offset="7888">
+          <caret line="60" column="71" selection-start-line="60" selection-start-column="71" selection-end-line="60" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/mission_get_tids.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="408" max-vertical-offset="3145">
+          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/admin/get_seller_info.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.6923075" vertical-offset="507" max-vertical-offset="1173">
+          <caret line="42" column="15" selection-start-line="42" selection-start-column="15" selection-end-line="42" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/sellerSucess.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.538462" vertical-offset="1070" max-vertical-offset="3468">
+          <caret line="76" column="20" selection-start-line="75" selection-start-column="12" selection-end-line="76" selection-end-column="20" />
+          <folding>
+            <marker date="1421493034000" expanded="true" signature="3036:3047" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/reg4.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4385321" vertical-offset="1087" max-vertical-offset="3417">
+          <caret line="78" column="306" selection-start-line="78" selection-start-column="306" selection-end-line="78" selection-end-column="306" />
+          <folding>
+            <marker date="1421982262000" expanded="true" signature="2402:2413" placeholder="..." />
+            <marker date="1421982262000" expanded="true" signature="3765:4244" placeholder="..." />
+            <marker date="1421982262000" expanded="true" signature="3772:3827" placeholder="..." />
+            <marker date="1421982262000" expanded="true" signature="3834:4236" placeholder="..." />
+            <marker date="1421982262000" expanded="true" signature="3943:4011" placeholder="..." />
+            <marker date="1421982262000" expanded="true" signature="4024:4156" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

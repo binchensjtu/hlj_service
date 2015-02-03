@@ -1,0 +1,41 @@
+<?php
+
+require_once 'IXR_Library.php';
+function send_to_other($web, $title, $con, $USER, $PASS, $count = -1)
+{
+    $client = new IXR_Client($web);
+    $content['title'] = $title;
+//$get_post_info->post_category;
+    $content['categories'] = array("海淘");
+    $content['description'] = $con;
+//  $content['custom_fields'] = array( array('key' => 'my_custom_fied','value'=>'yes') );
+    $content['mt_keywords'] = array('07c4039e97b4e4745a7cc6abc05b9367',"韩国");
+
+    if (!$client->query('metaWeblog.newPost', '', $USER, $PASS, $content, true)) {
+        die('Error while creating a new post' . $client->getErrorCode() . " : " . $client->getErrorMessage());
+    }
+    $ID = $client->getResponse();
+
+    if ($ID) {
+        echo 'Post published with ID:#'.$ID;
+    }
+}
+
+function get_a_blog($web,$id,$USER, $PASS)
+{
+    $client = new IXR_Client($web);
+//    $params = array($id,$USER,$PASS);
+    if (!$client->query('metaWeblog.getPost',$id,$USER,$PASS)) {
+        echo "fuck";
+        die('Error while creating a new post' . $client->getErrorCode() . " : " . $client->getErrorMessage());
+    }
+    $data = $client->getResponse();
+    echo $data;
+    var_dump($data);
+
+    if ($data) {
+
+//        var_dump($data);
+    }
+}
+

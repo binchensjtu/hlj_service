@@ -1,0 +1,13 @@
+<?php
+
+require('bcs.class.php');
+$mmc=memcache_init();
+if($mmc==false)
+    echo "mc init failed\n";
+else
+{
+    $url = memcache_get($mmc,"fuck");
+}
+uploadAnImage($url,"FuckFuck");
+
+?>

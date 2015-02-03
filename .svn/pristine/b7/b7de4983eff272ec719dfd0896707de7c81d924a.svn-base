@@ -1,0 +1,11 @@
+<?php
+    $mail = new SaeMail();
+    $mail->quickSend( 
+        "xhclybm@163.com" ,
+        "红领巾发货了" ,
+        "你订购的MUJI懒人沙发，发货了。请注意查收" ,
+        "caolixiang@gmail.com" ,
+        "clx010250966" 
+    );
+
+?>

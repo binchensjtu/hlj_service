@@ -1,0 +1,6 @@
+document.ready(function(){
+    $(".progress a").click(function(){
+        this.preventDefault();
+        alert("fuck");
+    });
+});

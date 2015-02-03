@@ -1,0 +1,13 @@
+<?php
+
+require_once __DIR__ . '/libs/KdtApiClient.php';
+
+$appId = '15db6704596966a91b';
+$appSecret = '7e6254589d51c55c4b52f7578806e82c';
+$client = new KdtApiClient($appId, $appSecret);
+$method = 'kdt.items.onsale.get';
+
+
+$out = $client->post($method);
+
+var_dump($out);

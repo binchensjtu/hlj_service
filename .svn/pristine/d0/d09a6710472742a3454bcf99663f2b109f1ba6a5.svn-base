@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/html">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="./css/another.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="up_button_area" class="clearfix">
+    <div id="price_area">
+        <span id="price">价格：￥<span id="priceNum">30000.00</span></span>
+        <span id="post_price">邮费：￥<span id="postNum">1200.00</span></span>
+        <span id="method">海外直邮</span>
+    </div>
+    <div id="price_button">
+        <button id="buy">立即购买</button>
+    </div>
+</div>
+
+<div id="priceFloatBottom">
+
+</div>
+
+
+<div id="priceFloat">
+    <p class="pay_alert">购买提醒</p>
+    <div id="info">
+        <p id="price_each">单价：￥<span id="eachFloat"></span></p>
+        <p id="price_post">邮费：￥<span id="postFloat"></span></p>
+        <p id="price_total">合计：￥<span id="totalFloat"></span></p>
+        <p id="price_info">请输入您的联系电话</p>
+        <form action="hello.php" method="post">
+            <div id="countMani">
+                <p id="countP">购买数量:</p>
+                <button class="op" id="minus">-</button><input type="number" id="opInput" value="1"/><button class="op" id="plus">+</button>
+            </div>
+            <input type="tel" id="phonebox" placeholder="请输入收货人手机号"/>
+            <input type="submit" name="submit" id="subit" value="确定"/>
+        </form>
+        <button name="cancel" id="subcancel">取消</button>
+    </div>
+</div>
+
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+<p>测试文字测试文字测试文字测试文字测试文字测试文字</p>
+
+<script>
+    $(document).ready(function(){
+
+
+        var eachFloat = $('#priceNum').text();
+        $("#eachFloat").text(eachFloat);
+        var postFloat = $('#postNum').text();
+        $("#postFloat").text(postFloat);
+        var totalFloat = parseInt(eachFloat) + parseInt(postFloat);
+        $("#totalFloat").text(totalFloat+'.00');
+        $('#buy').click(function(){
+            $('#priceFloat').css('visibility','visible');
+            $('#priceFloatBottom').css('visibility','visible');
+        });
+        $('#subcancel').click(function(){
+            $('#priceFloat').css('visibility','hidden');
+            $('#priceFloatBottom').css('visibility','hidden');
+        });
+        $("#subit").bind("click",function(event){
+            var value = $('#phonebox').val();
+            var length = value.length;
+            var mobile = /^1[3|4|5|8|7][0-9]\d{4,8}$/;
+            if((length == 11 && mobile.test(value))) {
+                $("<input name='totalHidden' id='totalHidden' value="+ postFloat + "type='hidden'>").insertAfter("#phonebox");
+                return true;
+            }else {
+                event.preventDefault();
+                $('#phonebox').val('请输入正确的手机号');
+                $('#phonebox').addClass('error');
+                return false;
+            }
+        });
+        $("#phonebox").focus(function(){
+            $('#phonebox').val('');
+            $('#phonebox').removeClass('error');
+        });
+        $("#plus").click(function(){
+            var count = $('#opInput').val();
+            count = parseInt(count);
+            if(isNaN(count)) {
+                count = 0;
+            }
+            count += 1;
+            $('#opInput').val(count);
+            $("#totalFloat").text((parseInt(eachFloat) * count + parseInt(postFloat) * count)+'.00');
+            $("<input name='totalHidden' id='totalHidden' value='"+ $("#totalFloat").text() + "'type='hidden'>").insertAfter("#phonebox");
+            return false;
+        });
+        $("#minus").click(function(){
+            var count = $('#opInput').val();
+            count = parseInt(count);
+            if(isNaN(count)) {
+                count = 1;
+            }
+            count -= 1;
+            if(count === 0) {
+                count = 1;
+            }
+            $('#opInput').val(count);
+            $("#totalFloat").text((parseInt(eachFloat) * count + parseInt(postFloat) * count)+'.00');
+            return false;
+        });
+        $('#opInput').change(function(){
+            var count = $('#opInput').val();
+            count = parseInt(count);
+            if(isNaN(count)) {
+                count = 1;
+            }
+            count -= 1;
+            if(count === 0) {
+                count = 1;
+            }
+            $('#opInput').val(count);
+            $("#totalFloat").text((parseInt(eachFloat) * count + parseInt(postFloat) * count)+'.00');
+        });
+    });
+</script>
+</body>
+</html>

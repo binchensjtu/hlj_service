@@ -1,0 +1,196 @@
+<?php
+
+// 用以截取短信字符的函数
+function utf_substr($str,$len)
+{
+    for($i=0;$i<$len;$i++)
+    {
+        $temp_str=substr($str,0,1);
+        if(ord($temp_str) > 127)
+        {
+            $i++;
+            if($i<$len)
+            {
+                $new_str[]=substr($str,0,3);
+                $str=substr($str,3);
+            }
+        }
+        else
+        {
+            $new_str[]=substr($str,0,1);
+            $str=substr($str,1);
+        }
+    }
+    return join($new_str,'');
+}
+
+session_start();
+require_once('saeDao.php');
+require_once __DIR__ . '/libs/KdtApiClient.php';
+require_once('mail.php');
+require_once('./push/push_hlj.php');
+
+$uni_time = microtime();
+
+
+// 查找数据，找到就不从session取了
+
+$where = array("wechat_id"=>$_SESSION['uwid']);
+$out = get($where,"user_info");
+
+if($out[0]["is_new"] == '0') {
+    $_SESSION['we_chat']=$out[0]["wechat_num"];
+    $_SESSION['mobile']=$out[0]["mobile"];
+    $_SESSION['email']=$out[0]["email"];
+}else {
+    // 新注册用户
+    $_SESSION['we_chat'] = $_POST['we_chat'];
+    $_SESSION['mobile'] = $_POST['mobile'];
+    $_SESSION['email'] = $_POST['email'];
+    // 开始插入数据
+    $mysql = new SaeMysql();
+    // 插入个人信息
+    $datetime = date('Y-m-d H:i:s',time());
+    $para = array("wechat_id"=>$_SESSION['uwid'],"wechat_num"=>$_SESSION['we_chat'],"mobile"=>$_SESSION['mobile'],"email"=>$_SESSION['email'],
+                  "is_new"=>'0',"date"=>$datetime);
+    insert($para,"user_info");
+
+}
+$datetime = date('Y-m-d H:i:s',time());
+// 插入订单，以便后续跟踪
+$para = array("uwid"=>$_SESSION['uwid'],"uni_time"=>$uni_time);
+$logi = insert($para,"logistic");
+$lastId = '';
+if($logi) {
+    $para = array("wechat_id"=>$_SESSION['uwid'],"country"=>$_SESSION['country'],"item_info"=>$_SESSION['item_info'],
+        "ps"=>$_SESSION['ps'],"ac_time"=>$datetime,"logistic_id"=>$logi,"uni_time"=>$uni_time,"state"=>"WAIT_ADMIN_REQUEST");
+    $lastId = insert($para,"auction");
+}
+
+// 插入有赞商品
+$appId = '15db6704596966a91b';
+$appSecret = '7e6254589d51c55c4b52f7578806e82c';
+$client = new KdtApiClient($appId, $appSecret);
+$method = 'kdt.item.add';
+$outerLogo = 'http://bcs.duapp.com/honglongjin-service/hlj_weixin_logo 2015.jpg';
+$params = array(
+    'price' => 1.00,
+    'title' => '“'.utf_substr($_SESSION['item_info'],9).'......”'.'(买家定制商品)'."--".$_SESSION['uwid']."--".$uni_time,
+    'desc' => "<p>商品信息：".$_SESSION['item_info']."</p><br><p>备注：".$_SESSION['ps']."</p><br>"."<div class='picdes'><p>代购说明：<br />1、代购商品若非运输破损导致商品无法正常使用，不提供退换。<br />2、代购到货时间通常为付款后2-4周，不排除物流公司原因造成的延迟到货情况，请亲们理解哦！</p></div>".
+              "<div class='picdiv'><img src='{$outerLogo}' alt='商品图片' class='itemPic'/></div>"."<div class='picdes'><p></p></div><br />",
+    'is_virtual' => 0,
+    'post_fee' => 0,
+    'sku_quantities' => '',
+    'sku_prices' => '',
+    'sku_outer_ids' => '',
+    'quantity' => 99,
+    'tag_ids' => '8134289,7851059',
+);
+
+$files = array(
+    array(
+        'url' => "http://imgqn.koudaitong.com/upload_files/2014/12/19/141895927818594791.jpg",
+        'field' => 'images[]',
+    ),
+);
+
+$youzanItem = $client->post($method, $params, $files);
+$param_youzan = array("num_iid" => $youzanItem['response']['item']['num_iid']);
+$where_youzan = array('auction_id'=>$lastId);
+update($param_youzan,$where_youzan,'auction');
+
+$mmc = memcache_init();
+if ($mmc == false)
+    echo "mc init failed\n";
+$users = memcache_get($mmc, "user_table");
+if ($users) {
+    array_push($users, $_SESSION['uwid']);
+
+} else {
+    $users = array($_SESSION['uwid']);
+}
+memcache_set($mmc, "user_table", $users);
+
+$emailName = strstr($_SESSION['email'],'@',true);
+// 生成备注信息
+$ps = '';
+if($_SESSION['ps'] == ''){
+    $ps = "无";
+}else {
+    $ps = $_SESSION['ps'];
+}
+// 发送收到需求的邮件
+$mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+<p>亲爱的{$emailName}：</p>
+<p>红领巾已收到你提交的购买需求，正在{$_SESSION['country']}进行采购；一旦确认有货，我们将在第一时间通知你。</p>
+<br />
+<pre><strong>订单信息</strong>
+商品信息：{$_SESSION['item_info']}
+备注信息：{$ps}</pre>
+<br />
+<pre><strong>如何查看订单进度？</strong>
+STEP1：进入【红领巾】微信订阅号。
+STEP2：在【红领巾】订阅号中，输入“我的订单”。
+STEP3：查看订单进度：“待付款”列表展示的为当地有货、可进行代购的商品；如确认代购，请尽快完成付款。</pre>
+
+<img src='http://testhlj.qiniudn.com/hlj_weixin_logo.jpg' alt='logo'/>
+</body>
+</html>";
+
+send_mail_lazypeople($_SESSION['email'],
+    "红领巾通知",
+    $mailcontent);
+
+$url = "http://v.juhe.cn/sms/send?";
+$info = $_SESSION['item_info'];
+
+if(mb_strlen($info) > 23) {
+    $info = "“".utf_substr($info,9).'...”';
+}
+
+$tpl_value=urlencode("#name#=".$emailName."&#item#=".$info."&#country#=".$_SESSION['country']);
+$para = "key=4bdcb8ad8dab5dacfd737536f0d444f2&dtype=json&mobile=".$_SESSION['mobile']."&tpl_id=1285&tpl_value=".$tpl_value;
+file_get_contents ( $url."".$para);
+
+pushMessageToFangFang("buy");
+pushMessageToHuanHuan("buy");
+
+
+session_destroy();
+
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾小助手</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="http://7u2les.com1.z0.glb.clouddn.com/cust.css"/>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery-2.0.3.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.mobile.min.js"></script>
+    <script src="http://7u2les.com1.z0.glb.clouddn.com/jquery.validate.min.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>收到了，敬礼！</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <img src="http://testhlj.qiniudn.com/red.jpg" alt="" id="suc_pic" style="max-width: 100%;"/><br>
+        <p>需求已经收到！<?php echo $_SESSION['country'] ?>的红领巾已奔赴在为你采购的路上。确认有货后，我们将向你发送确认购买信息，请耐心等待、并留意邮件/短信通知。</p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

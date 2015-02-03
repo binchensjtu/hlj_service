@@ -1,0 +1,9 @@
+---
+name: wechatphpsdk
+version: 1
+...
+cron:
+    - description: cron test for tech
+          url: pic.php
+          schedule: every 1 mins
+          timezone: Beijing

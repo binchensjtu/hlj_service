@@ -1,0 +1,11 @@
+<?php
+
+require_once('saeDao.php');
+
+
+delete($where,"auction");
+
+var_dump($out);
+
+
+?>

@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 14/12/5
+ * Time: 下午4:46
+ */
+
+
+$picURLArray = array("www.baidu.com","www.taobao.com");
+$picCount = count($picURLArray);
+$pic_des = "";
+for($i=0; $i<$picCount; $i++) {
+    $pic_des .="<div class='picdiv'><img src='$picURLArray[$i]' alt='商品图片' class='itemPic'/></div>";
+    $des = $_POST['q_des'.$i];
+    $pic_des .="<div class='picdes'><p>$des</p></div><br />";
+}
+
+var_dump($pic_des);
+
+
+
+
+?>

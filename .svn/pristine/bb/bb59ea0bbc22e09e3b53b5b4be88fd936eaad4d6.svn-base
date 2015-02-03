@@ -1,0 +1,46 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: MR X6
+ * Date: 2015/1/12
+ * Time: 1:17
+ */
+
+$countries = $_REQUEST['countries'];
+if ($countries == '日本') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt9zsfnq3EHYlfetDtcNEnnQ">谢沅瑾</option>
+    <option value="oMD0Nt7nav7B6cyeG80fTJSInDGI">姚玉馨</option>
+<?php
+} else if ($countries == '香港') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt-NDxE4n-e0wRYDXi6g-XL8">吴湘如</option>
+    <option value="oMD0Nt7K8CDZxqYQfen1bIIuVe3o">文予</option>
+    <option value="oMD0Nt6mHeIt-mKiTL7wpr7-QZL8">张娅</option>
+<?php
+} else if ($countries == '德国') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt-CPU4wCEfrHVclcZariWag">梁乐睿</option>
+<?php
+} else if ($countries == '美国') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt9avc3zMSCIMVHpsOVU4e5g">Changshuo Shi</option>
+    <option value="oMD0Ntxtzaw13mD1_Qx2gwz6rHiU">张济童</option>
+    <option value="oMD0Nt5x9FEHRLOlV8e6UsYkX1Z8">赵能俊</option>
+    <option value="oMD0Nt5LHWtWX3IBqJ0YdrZ04MgM">张艺琼</option>
+<?php
+} else if ($countries == '韩国') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt9Ruu0n7av3rSJBF-DG3ytM">王思佳</option>
+<?php
+} else if ($countries == '法国') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt4TE65ZYjYaEsltBJrHjKXI">梁厶尹</option>
+<?php
+} else if ($countries == '测试用') { ?>
+    <option value="no"><-请选择买手-></option>
+    <option value="oMD0Nt5hsLXV5IDJjsBo3L3d0mCc">韦晓晴</option>
+    <option value="oMD0Nt9zKQGtfL1V6VtCgNkjr19U">曹莅祥</option>
+<?php
+}
+?>

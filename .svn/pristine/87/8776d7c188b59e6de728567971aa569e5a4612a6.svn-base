@@ -1,0 +1,22 @@
+<?php
+function get($where = null,$table) {
+    $sql = "select * from ".$table;
+    $sql = $sql."".getWhereString($where);
+    //echo "[get]".$sql."<br>";
+    return $this->query($sql);
+}
+
+function getWhereString($params) {
+
+    $sql = "";
+    if (is_array($params)) {
+        $sql = " where ";
+        $where = $this->_getKeyValString($params, " and ");
+        $sql = $sql.$where;
+    }
+    return $sql;
+}
+
+$where = ["id=1","name='clx'"];
+echo get($where,"good");
+?>

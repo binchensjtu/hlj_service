@@ -1,0 +1,76 @@
+<?php
+
+
+require_once('saeDao.php');
+require_once 'blog.php';
+session_start();
+$mmc = memcache_init();
+$picURLArray = memcache_get($mmc, $_SESSION['uwid']."_pic");
+$picCount = count($picURLArray);
+
+?>
+
+<?php
+// 开始插入数据库
+
+
+// 更新博客（新浪红领巾）
+
+$title = $_POST['q_title'];
+$country = $_POST['q_country'];
+$cat = $_POST['q_cat'];
+$cat_link = array("其他国家"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=others","日本"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=jap","法国"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=fra","澳大利亚"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=aus","美国"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=am","英国"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=eng","香港"=>"http://hljbloginfo.duapp.com/wordpress/?category_name=hk");
+
+$cat_con = "<div><span class='cat_name'>采购地区：</span><span id='cat_area'><a href='$cat_link[$country]'>$country</a></span><span class='cat_name'>   品类：</span><span id='cat_name'><a href='http://hljbloginfo.duapp.com/wordpress/?tag=$cat'>$cat</a></span></div><br/>";
+$pic_des = "";
+for($i=0; $i<$picCount; $i++) {
+    $pic_des .="<div class='picdiv'><img src='{$picURLArray[$i]}' alt='商品图片' class='itemPic'/></div>";
+    $des = $_POST['q_des'.($i+1)];
+    $pic_des .="<div class='picdes'><p>$des</p></div><br />";
+}
+$more = "<!--more-->";
+$money = $_POST['q_price'];
+$postMoney = $_POST['post_price'];
+$floatBack = "<div id='priceFloatBottom'></div>";
+$floatPanel = "<div id='priceFloat' xmlns=\"http://www.w3.org/1999/html\"><p class='pay_alert'>购买提醒</p><div id='info'><p id='price_each'>单价：￥<span id='eachFloat'></span></p><p id='price_post'>邮费：￥<span id='postFloat'></span></p><p id='price_total'>合计：￥<span id='totalFloat'></span></p><p id='price_info'>请输入您的联系电话</p><form action='hello.php' method='post'><div id='countMani'><p id='countP'>购买数量:</p><button class='op' id='minus'>-</button><input type='number' id='opInput' value='1'/><button class='op' id='plus'>+</button></div><input type='tel' id='phonebox' placeholder='请输入收货人手机号'/><button type='submit' name='submit' id='subit'/>提交</button></form><button name='cancel' id='subcancel'>取消</button></div></div>";
+
+$price = "<div id='up_button_area' class='clearfix'><div id='price_area'><span id='price'>价格：￥<span id='priceNum'>{$money}</span></span><span id='post_price'>邮费：￥<span id='postNum'>{$_POST['q_post']}</span></span><span id='method'>海外直邮</span></div><div id='price_button'><a href='#' id='buy'>立即购买</a></div></div>";
+
+$content = $cat_con.''.$pic_des.''.$more.''.$price.''.$floatBack.''.$floatPanel;
+//$content = $itemName."<br><div><br></div><div><br>产地：".$_POST['country']."</div><div><br></div><div><img title='what' src='".$_SESSION['picURL']."'></div><br><br>".$_POST["information"]."<br><br>".$_SESSION['accessURL'];
+$id = send_to_other("http://hljbloginfo.duapp.com/wordpress/xmlrpc.php",$title,$content,"hlj_service","fanganhuan13579",$cat,$country);
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>红领巾轻发布</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="./js/cust.js"></script>
+</head>
+<body>
+<div data-role="page">
+    <div data-role="header" data-position="fixed">
+        <h1>发布成功！</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <p>你已经成功在红领巾上发布一个商品。完成以下操作，即可轻松推广你的宝贝：</p>
+        <p><span style="background-color: black;color: white;padding: 1px, 1px;">Step1</span></p>
+        <p>点击页面最下方<span style="color: red;">查看我的发布</span>，打开你的商品页面。</p>
+        <p><span style="background-color: black;color: white;padding: 1px, 1px;">Step2 </span></p>
+        <p>打开后，点击商品页面右上角的<img src="http://bcs.duapp.com/caolixiang33/share_button.jpg" alt="" id="share_pic" style="max-width: 5%;"/>标记，将商品发送给朋友、分享到朋友圈，也可以收藏在自己的微信里。</p>
+        <img src="http://bcs.duapp.com/caolixiang33/share_small.jpg" alt="" id="share_pic" style="max-width: 100%;"/><br>
+        <br>
+        <p><?php echo "<a href='http://hljbloginfo.duapp.com/wordpress/?p=$id'>查看我的发布</a>" ?></p>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

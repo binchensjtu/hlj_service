@@ -1,0 +1,12 @@
+<?php
+
+require_once('saeDao.php');
+
+
+$where = array("item_info"=>'');
+$out = get($where,"auction");
+
+var_dump($out);
+
+
+?>

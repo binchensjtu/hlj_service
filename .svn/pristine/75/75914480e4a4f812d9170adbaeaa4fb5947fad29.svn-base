@@ -1,0 +1,97 @@
+<?php
+session_start();
+
+$_SESSION['uwid'] = $_REQUEST['uwid'];
+// 获取图片数组
+$mmc = memcache_init();
+$picURLArray = memcache_get($mmc, $_SESSION['uwid']."_pic");
+$picCount = count($picURLArray);
+?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾海外代购</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="./js/cust.js"></script>
+    <script>
+        $(document).ready(function(){
+            $(".picdiv").css("text-align","center");
+            $(".itemPic").css('max-width','200px');
+            $(".itemPic").css('margin-top','5px');
+            $(".itemPic").css('margin-bottom','5px');
+        });
+    </script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>红领巾轻发布</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <form method="post" action="sellerSucess.php">
+            <ul data-role="listview">
+                <li>
+                    <label for="q_title">请填写商品标题</label>
+                    <input type="text" name="q_title" id="q_title" value="" placeholder="例：雅诗兰黛" data-clear-btn="true"> 
+
+                    <label for="q_price">请填写商品价格</label>
+                    <input type="text" name="q_price" id="q_price" value="" placeholder="例：雅诗兰黛" data-clear-btn="true"> 
+
+                    <label for="q_post">请填写商品邮费</label>
+                    <input type="text" name="q_post" id="q_post" value="" placeholder="例：雅诗兰黛" data-clear-btn="true"> 
+                </li>
+                <li>
+                    <label for="q_country" class="select">请选择你发布商品购买地</label>
+                    <select name="q_country" id="q_country" data-native-menu="true">
+                            <option value="日本">日本</option>
+                            <option value="美国">美国</option>
+                            <option value="法国">法国</option>
+                            <option value="香港">香港</option>
+                            <option value="澳大利亚">澳大利亚</option>
+                            <option value="英国">英国</option>
+                            <option value="其他">其他</option>
+                    </select>
+                    <label for="q_cat" class="select">请选择你发布商品购买地</label>
+                    <select name="q_cat" id="q_cat" data-native-menu="true">
+                            <option value="化妆品">化妆品</option>
+                            <option value="数码">数码</option>
+                            <option value="母婴用品">母婴用品</option>
+                            <option value="服装">服装</option>
+                            <option value="鞋包">鞋包</option>
+                            <option value="其他">其他</option>
+                    </select>
+                </li>
+                <li>
+                    <?php
+                    for($i=0; $i<$picCount; $i++) {
+                        ?>
+                        <div class="picdiv">
+                            <img src="<?php echo $picURLArray[$i] ?>" alt="商品图片" class="itemPic"/>
+                        </div>
+
+                        <label for="<?php echo 'q_des'.($i+1); ?>"><?php echo '描述'.($i+1); ?></label>
+                        <textarea cols="40" rows="8" name="<?php echo 'q_des'.($i+1); ?>" id="<?php echo 'q_des'.($i+1); ?>" value="" placeholder="" data-clear-btn="true"></textarea>
+                    <?php
+                    }
+                    ?>
+                     
+                     
+                </li>
+            </ul>
+            <input type="submit" value="下一步" data-transition="slideup"  data-theme="b" id="sub">
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+</body>
+</html>

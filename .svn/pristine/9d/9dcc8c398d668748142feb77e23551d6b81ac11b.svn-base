@@ -1,0 +1,18 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: PegionAndLion
+ * Date: 15/1/9
+ * Time: 下午7:25
+ */
+
+$tid = $_REQUEST['tid'];
+$mmc = memcache_init();
+if ($mmc == false) {
+    echo "mc init failed\n";
+}
+$pack = memcache_get($mmc, $tid."_info");
+var_dump($pack);
+$result = json_encode(array($pack));
+$callback=$_GET['callback'];
+echo $callback."($result)";

@@ -1,0 +1,17 @@
+<?php
+
+require_once('saeDao.php');
+$para = array("wechat_id"=>'123',"wechat_num"=>'123',"mobile"=>'13888224564',"email"=>'haha@gmail.com',
+    "is_new"=>'0');
+$out = insert($para,"user_info");
+echo $out;
+
+$datetime = date('Y-m-d H:i:s',time());
+$para = array("valid"=>'0',"seller"=>$this->getRequest('FromUserName'),"use_date"=>$datetime);
+$where = array("code"=>$keyword);
+update($para,$where,"yaoqingma");
+$para_after = array("wechat_id"=>$this->getRequest('FromUserName'),"level"=>'3',"date"=>$datetime);
+insert($para_after,'seller');
+
+
+?>

@@ -1,0 +1,30 @@
+<?php
+require_once('mail.php');
+$mailcontent = "<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='UTF-8'>
+    <title></title>
+</head>
+<body>
+
+
+<p>亲爱的#name#：</p>
+<p>你发布的商品已被购买，请尽快通过【红领巾】微信订阅号发货。</p>
+<br />
+<p>订单信息</p>
+<p>商品信息：#title#，#quantity#件</p>
+<p>收货信息：#name#，#tel#，#address#</p>
+<br />
+<p>如何发货？</p>
+<p>STEP1：进入【红领巾】微信订阅号</p>
+<p>STEP2：输入“我要发货”</p>
+<p>STEP3：进入发货管理后台，选择物流公司、输入物流单号</p>
+
+<img src='http://bcs.duapp.com/honglongjin-service/hlj_weixin_logo 2015.jpg' alt='logo'/>
+</body>
+</html>";
+
+send_mail_lazypeople('568108047@qq.com',
+    "红领巾通知",
+    $mailcontent);

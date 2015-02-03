@@ -1,0 +1,56 @@
+<?php
+function getWhereString($params) {
+
+    $sql = "";
+    if (is_array($params)) {
+        $sql = " where ";
+        $where = getKeyValString($params, " and ");
+        $sql = $sql.$where;
+    }
+    return $sql;
+}
+
+function getKeyValString($params, $split) {
+    $str = "";
+    if (is_array($params)) {
+        $paramArr = array();
+        foreach($params as $key=>$val) {
+            $valstr = $val;
+            if (is_string($val)) {
+                $valstr = "'".$val."'";
+            }
+            $paramArr[] = $key."=".$valstr;
+        }
+        $str = $str.implode($split, $paramArr);
+    }
+    return $str;
+}
+
+// 删除数据
+function delete($where,$table) {
+    $wheres = getWhereString($where);
+    $sql = "delete from ".$table.$wheres;
+    $mysql = new SaeMysql();
+    $mysql->runSql($sql);
+    if ($mysql->errno() != 0) {
+        die("Error:" . $mysql->errmsg());
+    }
+}
+// 读取数据
+function get($where = null,$table) {
+    $sql = "select * from ".$table;
+    $sql = $sql."".getWhereString($where);
+    $mysql = new SaeMysql();
+    $data = $mysql->getData( $sql );
+    return $data;
+}
+
+// 删除数据
+
+
+
+$where = array('auction_id'=>'68');
+$o = get($where,"auction");
+echo $o;
+
+?>

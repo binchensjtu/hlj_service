@@ -1,0 +1,95 @@
+<?php
+    session_start();
+    $country = $_REQUEST['country'];
+    $brand=$_REQUEST['brand'];
+    $item=$_REQUEST['item'];
+    $information = $_REQUEST['information'];
+    $_SESSION['uwid'] = $_REQUEST['uwid'];
+
+    $mysql = new SaeMysql();
+
+    // 插入收货信息
+    $sql = "SELECT * FROM `logistic` WHERE `uwid`='".$_SESSION['uwid']."'";
+    $data = $mysql->getData( $sql );
+    if($data) {
+        $_SESSION['preAddress'] = $data[0]["address"];
+        $_SESSION['preZipcode'] = $data[0]["zipcode"];
+        $_SESSION['preReceiver'] = $data[0]["reciever"];
+        $_SESSION['prePhone'] = $data[0]["phone"];
+        $_SESSION['preDefault'] = $data[0]["isDefault"];
+    }
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>红领巾海外代购</title>
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.css"/>
+    <link rel="stylesheet" href="./css/cust.css"/>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-mobile/1.4.1/jquery.mobile.min.js"></script>
+    <script src="//cdnjscn.b0.upaiyun.com/libs/jquery-validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="./js/cust.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="home">
+    <div data-role="header" data-position="fixed">
+        <h1>购买需求</h1>
+    </div>
+    <div class="ui-body ui-body-a content-it">
+        <form method="post" action="reg2.php">
+            <ul data-role="listview">
+                <li>
+                    <label for="country" class="select">请选择国家</label>
+                    <select name="country" id="country" data-native-menu="false">
+                            <option value="日本">日本</option>
+                            <option value="美国">美国</option>
+                            <option value="法国">法国</option>
+                            <option value="香港">香港</option>
+                            <option value="澳大利亚">澳大利亚</option>
+                    </select>
+                </li>
+                <li>
+                    <label for="brand">请填写品牌</label>
+                    <input type="text" name="brand" id="brand" value="" placeholder="例：雅诗兰黛" data-clear-btn="true"> 
+                    <label for="item">请填写商品信息</label>
+                    <textarea cols="40" rows="8" name="item" id="item" value="" placeholder="例：肌透修护眼部精华霜15ml" data-clear-btn="true"></textarea>
+                    <label for="information">备注信息</label>
+                    <textarea cols="40" rows="8" name="information" id="information" value="" placeholder="" data-clear-btn="true"></textarea> 
+                </li>
+            </ul>
+            <input type="submit" value="下一步" data-transition="slideup"  data-theme="b" id="sub">
+        </form>
+    </div>
+    <div data-role="footer" data-position="fixed">
+        <h4>红领巾海外代购</h4>
+    </div>
+</div>
+    <script>
+        var countryPre = "<?php echo $country?>";
+        var brandPre = "<?php echo $brand?>";
+        var itemPre = "<?php echo $item?>";
+        var informationPre = "<?php echo $information?>";
+        if(brandPre!='') {
+            $("#brand").val(brandPre);
+        }
+        if(itemPre!='') {
+            $("#item").val(itemPre);
+        }
+        if(informationPre!='') {
+            $("#information").val(informationPre);
+        }
+        if(countryPre!='') {
+            var option = "#country option[value='"+countryPre+"']";
+            $(option).attr("selected", true);
+        }
+
+
+
+
+    </script>
+</body>
+</html>

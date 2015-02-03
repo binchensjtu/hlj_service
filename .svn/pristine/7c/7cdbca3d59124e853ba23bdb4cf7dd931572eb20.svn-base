@@ -1,0 +1,38 @@
+<?php
+function get($where = null,$table) {
+    $sql = "select * from ".$table;
+    $sql = $sql."".getWhereString($where);
+    //echo "[get]".$sql."<br>";
+    return $sql;
+}
+
+function getWhereString($params) {
+
+    $sql = "";
+    if (is_array($params)) {
+        $sql = " where ";
+        $where = getKeyValString($params, " and ");
+        $sql = $sql.$where;
+    }
+    return $sql;
+}
+
+function getKeyValString($params, $split) {
+    $str = "";
+    if (is_array($params)) {
+        $paramArr = array();
+        foreach($params as $key=>$val) {
+            $valstr = $val;
+            if (is_string($val)) {
+                $valstr = "'".$val."'";
+            }
+            $paramArr[] = $key."=".$valstr;
+        }
+        $str = $str.implode($split, $paramArr);
+    }
+    return $str;
+}
+
+$where = array('id'=>'1', 'name'=>'clx');
+echo get($where,"good");
+?>
